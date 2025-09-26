@@ -1,0 +1,27 @@
+{
+  "name": "whatifworld",
+  "version": "1.0.0",
+  "description": "this is ai featured project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PRATEEKK9223/WhatIfWorld.git"
+  },
+  "author": "chakrapani_sir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PRATEEKK9223/WhatIfWorld/issues"
+  },
+  "homepage": "https://github.com/PRATEEKK9223/WhatIfWorld#readme",
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.2",
+    "nodemon": "^3.1.10",
+    "path": "^0.12.7"
+  }
+}
