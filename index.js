@@ -6,15 +6,12 @@ require("dotenv").config();
 const mongoose=require("mongoose");
 
 
-
-
 // middlewares
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-
 
 
 // to connect with database
@@ -31,6 +28,6 @@ app.listen(3000,()=>{
 });
 
 
-app.get("/user",(req,res)=>{
+app.get("/manish",(req,res)=>{
     res.render("home.ejs");
 });
