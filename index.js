@@ -28,6 +28,13 @@ app.listen(3000,()=>{
 });
 
 
-app.get("/manish",(req,res)=>{
-    res.render("home.ejs");
+app.get("/scenario",(req,res)=>{
+    res.render("scenario");
 });
+
+app.post("/scenario",(req,res)=>{
+    console.log(req.body);
+    res.send("data received");
+});
+
+

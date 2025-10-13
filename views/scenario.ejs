@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scenario</title>
+</head>
+<body>
+    <h1>What If World</h1>
+    <form action="/scenario" method="POST">
+        <div>
+            <label for="scenario">Enter your scenario:</label><br>
+            <textarea id="scenario" name="scenario" rows="4" cols="50"></textarea><br>
+            <input type="radio" name="domain" value="all" checked> All<br>
+            <input type="radio" name="domain" value="health"> Health<br>
+            <input type="radio" name="domain" value="education"> Education<br>
+            <input type="radio" name="domain" value="environment"> Environment<br>
+            <input type="radio" name="domain" value="technology"> Technology<br>
+            <input type="radio" name="domain" value="economy"> Economy<br>
+            <input type="radio" name="domain" value="society"> Society<br>
+            <input type="radio" name="domain" value="politics"> Politics<br>
+            
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>
