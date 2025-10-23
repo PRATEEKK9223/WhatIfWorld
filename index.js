@@ -1,9 +1,20 @@
 // importing modules
-const express=require("express");
+
+import express from "express";
 const app=express();
-const path=require("path");
-require("dotenv").config();
-const mongoose=require("mongoose");
+import path from "path";
+import { fileURLToPath } from "url";
+import dotenv from "dotenv";
+dotenv.config();
+import mongoose from "mongoose";
+import {GoogleGenAI} from '@google/genai';
+ import Cerebras from '@cerebras/cerebras_cloud_sdk';
+
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 
 // middlewares
@@ -33,8 +44,68 @@ app.get("/scenario",(req,res)=>{
 });
 
 app.post("/scenario",(req,res)=>{
+    let scenario=req.body.scenario;
+    let domain=req.body.domain;
     console.log(req.body);
-    res.send("data received");
+    // CerebrasFetch(scenario);
+     const client = new Cerebras({
+    apiKey: process.env.CEREBRAS_API_KEY, // This is the default and can be omitted
+    });
+
+
+    async function main() {
+  const completion = await client.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content: `
+        You are an AI future scenario predictor.
+        Given a "What if" scenario and its domain, respond strictly in the following JSON structure:
+
+        {
+          "textual_analysis": {
+            "scenario": "string",
+            "domain": "string",
+            "probability": number,
+            "key_implications": ["string", "string", ...],
+            "potential_challenges": ["string", "string", ...]
+          },
+          "statistics": {
+            "Metric1": number,
+            "Metric2": number,
+            "Metric3": number,
+            "Metric4": number
+          }
+        }
+
+        The response should change dynamically based on the domain provided.
+        Use domain-specific metrics. Example domains include:
+        - Environment → CO2 Reduction, Job Creation, Cost Reduction, Efficiency Gain
+        - Health → Life Expectancy, Recovery Rate, Healthcare Cost Reduction, Innovation Index
+        - Education → Literacy Rate, Student Engagement, Digital Access, Teaching Quality
+        - Technology → Innovation Rate, Adoption Level, Automation Impact, Cyber Risk
+        - Economy → GDP Growth, Employment Rate, Inflation Stability, Market Confidence
+        - Society → Social Welfare, Equality Index, Safety Level, Cultural Growth
+        - Politics → Stability Score, Policy Impact, Voter Engagement, International Relations
+        `
+      },
+      {
+        role: "user",
+        content: `Scenario: ${scenario}\nDomain: ${domain}`
+      }
+    ],
+    model: "llama-4-scout-17b-16e-instruct",
+    response_format: { type: "json_object" }
+  });
+
+  const result = JSON.parse(completion.choices[0].message.content);
+  result.textual_analysis.probability*=100;
+  console.log(result);
+  res.render("result", { result });
+}
+    main();
+
 });
+
 
 
