@@ -9,6 +9,13 @@ dotenv.config();
 import mongoose from "mongoose";
 import Cerebras from '@cerebras/cerebras_cloud_sdk';
 import Result from "./Models/result.js";
+import multer from 'multer';
+import cloudinary from "./cloudinary-script.js";
+import { v2 as cloudinaryV2 } from 'cloudinary';
+
+const upload = multer({ storage: multer.memoryStorage() });
+
+console.log(process.env.CLOUDINARY_API_KEY, "in app.js");
 
 
 
@@ -23,6 +30,7 @@ app.set("views",path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+
 
 
 // to connect with database
@@ -106,13 +114,62 @@ app.post("/scenario",async(req,res)=>{
     }).catch(err=>{
         console.log("Error saving result to DB",err);
     });
-    res.render("result", { result });
+
+    res.render("result", { result});
 }catch(err){
     console.log(err);
     res.send("Some error occurred");
 }
-
 });
+
+
+
+
+
+app.post('/upload-chart', upload.fields([{ name: 'barChart' }, { name: 'pieChart' }]), async (req, res) => {
+  try {
+    const bar = req.files['barChart'][0];
+    const pie = req.files['pieChart'][0];
+
+    const uploadToCloudinary = (fileBuffer, fileName) => {
+      return new Promise((resolve, reject) => {
+        const uploadStream = cloudinaryV2.uploader.upload_stream(
+          { folder: 'WhatIfWorld-Charts', public_id: fileName, resource_type: 'image' },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        );
+        uploadStream.end(fileBuffer); // ✅ send the image data
+      });
+    };
+
+    const [barUpload, pieUpload] = await Promise.all([
+      uploadToCloudinary(bar.buffer, 'barChart'),
+      uploadToCloudinary(pie.buffer, 'pieChart')
+    ]);
+
+     // ✅ Update the same document with image URLs
+    // await Result.findByIdAndUpdate(resultId, {
+    //   $set: {
+    //     chartImages: {
+    //       barChart: barUpload.secure_url,
+    //       pieChart: pieUpload.secure_url
+    //     }
+    //   }
+    //   });
+
+    res.json({
+      message: 'Charts uploaded successfully!',
+      barChartUrl: barUpload.secure_url,
+      pieChartUrl: pieUpload.secure_url
+    });
+  } catch (err) {
+    console.error('Cloudinary upload failed:', err);
+    res.status(500).json({ error: 'Upload failed' });
+  }
+});
+
 
 
 

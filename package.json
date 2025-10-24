@@ -21,10 +21,12 @@
     "@cerebras/cerebras_cloud_sdk": "^1.50.0",
     "@google/genai": "^1.25.0",
     "chart.js": "^4.5.1",
+    "cloudinary": "^2.8.0",
     "dotenv": "^17.2.2",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "mongoose": "^8.18.2",
+    "multer": "^2.0.2",
     "nodemon": "^3.1.10",
     "openai": "^6.3.0",
     "path": "^0.12.7"
