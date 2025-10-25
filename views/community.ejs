@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community</title>
+    <link rel="stylesheet" href="css/community.css">
+</head>
+<body>
+    <h1>Community Submission</h1>
+        <% if (typeof posts !== 'undefined' && posts.length > 0) { %>
+            <ul>
+                <% posts.forEach(post => { %>
+                    <li style="margin-bottom:20px;" id="post">
+                        <div>
+                            <h3>Scenario: <%= post.result.textual_analysis.scenario %></h3>
+                            <p><strong>Domain:</strong> <%= post.result.textual_analysis.domain %></p>
+                            <p><strong>Probability:</strong> <%= post.result.textual_analysis.probability %>%</p>
+                            Ket Implications:
+                            <ul>
+                                <% post.result.textual_analysis.key_implications.forEach(item => { %>
+                                <li><%= item %></li>
+                                <% }) %>
+                            </ul>
+                            Potential Challenges:
+                             <ul>
+                            <% post.result.textual_analysis.potential_challenges.forEach(item => { %>
+                                <li><%= item %></li>
+                            <% }) %>
+                            </ul>
+                            <mark><small>Shared: <%= new Date(post.sharedAt).toLocaleString() %></small></mark>
+                        </div>
+
+                        <div>
+                            <% if (post.result.chartImages && post.result.chartImages.barChart) { %>
+                                <img src="<%= post.result.chartImages.barChart %>" alt="bar chart" style="max-width:600px; display:block;" />
+                            <% } %>
+                            <!-- <% if (post.result.chartImages && post.result.chartImages.pieChart) { %>
+                                <img src="<%= post.result.chartImages.pieChart %>" alt="pie chart" style="max-width:300px; display:block; margin-top:8px;" />
+                            <% } %> -->
+                        </div>
+                        
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>No community posts yet.</p>
+        <% } %>
+</body>
+</html>

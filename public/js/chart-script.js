@@ -1,7 +1,3 @@
-// const stats = <%- JSON.stringify(result.statistics) %>;
-
-// console.log("Stats data:", stats);
-// console.log("Result ID:", resultId);
 
     let labels = [];
     let values = [];
@@ -109,9 +105,6 @@
     });
 
 
-
-
-
 // Frontend
 const barCanvas = document.getElementById('scenarioChart');
 const pieCanvas = document.getElementById('scenarioChart-pie');
@@ -122,7 +115,7 @@ barCanvas.toBlob(async (barBlob) => {
     const formData = new FormData();
     formData.append('barChart', barBlob, 'barChart.png');
     formData.append('pieChart', pieBlob, 'pieChart.png');
-    // formData.append('resultId', resultId);
+    formData.append('resultId', resultId);
 
     await fetch('/upload-chart', {
       method: 'POST',
@@ -130,6 +123,7 @@ barCanvas.toBlob(async (barBlob) => {
     });
   });
 });
+
 
 
 

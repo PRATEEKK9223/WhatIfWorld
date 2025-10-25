@@ -9,6 +9,7 @@ dotenv.config();
 import mongoose from "mongoose";
 import Cerebras from '@cerebras/cerebras_cloud_sdk';
 import Result from "./Models/result.js";
+import Community from "./Models/community.js";
 import multer from 'multer';
 import cloudinary from "./cloudinary-script.js";
 import { v2 as cloudinaryV2 } from 'cloudinary';
@@ -106,22 +107,17 @@ app.post("/scenario",async(req,res)=>{
 
     const result = JSON.parse(completion.choices[0].message.content);
     result.textual_analysis.probability*=100;  
-    console.log(result);
-    // save result to database
-    const newResult=new Result(result);
-    await newResult.save().then(res=>{
-        console.log("Result saved to DB",res);
-    }).catch(err=>{
-        console.log("Error saving result to DB",err);
-    });
-
-    res.render("result", { result});
+  
+  // persist result and then render the result page with the saved document id
+  const newResult = new Result(result);
+  await newResult.save();
+  // console.log('Result saved to DB:', newResult._id);
+  res.render("result", { result, resultId: newResult._id });
 }catch(err){
     console.log(err);
     res.send("Some error occurred");
 }
 });
-
 
 
 
@@ -149,15 +145,22 @@ app.post('/upload-chart', upload.fields([{ name: 'barChart' }, { name: 'pieChart
       uploadToCloudinary(pie.buffer, 'pieChart')
     ]);
 
-     // ✅ Update the same document with image URLs
-    // await Result.findByIdAndUpdate(resultId, {
-    //   $set: {
-    //     chartImages: {
-    //       barChart: barUpload.secure_url,
-    //       pieChart: pieUpload.secure_url
-    //     }
-    //   }
-    //   });
+    // ✅ Read resultId from the incoming form fields and validate
+    const resultId = req.body && req.body.resultId;
+    if (!resultId) {
+      console.error('upload-chart: missing resultId in request body');
+      return res.status(400).json({ error: 'Missing resultId' });
+    }
+
+    // Update the same document with image URLs
+    await Result.findByIdAndUpdate(resultId, {
+      $set: {
+        chartImages: {
+          barChart: barUpload.secure_url,
+          pieChart: pieUpload.secure_url
+        }
+      }
+    });
 
     res.json({
       message: 'Charts uploaded successfully!',
@@ -170,6 +173,30 @@ app.post('/upload-chart', upload.fields([{ name: 'barChart' }, { name: 'pieChart
   }
 });
 
+app.post("/submit-result",async(req,res)=>{
+    const { resultId, action } = req.body;
+    // const allPost=await Result.find({});
+    // console.log("All posts:", allPost);
+   if(action === 'yes'){
+     try {
+       // avoid duplicate shares for the same result
+       const existing = await Community.findOne({ result: resultId });
+       if (!existing) {
+         const newPost = new Community({ result: resultId });
+         let post=await newPost.save();
+       }
+
+       // fetch all community posts with populated results to render
+       const posts = await Community.find({}).sort({ sharedAt: -1 }).populate('result');
+       return res.render('community', { posts });
+     } catch (err) {
+       console.error('Error saving community post:', err);
+       return res.status(500).send('Failed to save community post');
+     }
+   }else{
+    res.render(`scenario`);
+   }
+});
 
 
 

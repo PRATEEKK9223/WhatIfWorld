@@ -44,10 +44,23 @@
     </div>
   </div>
 
+  <hr>
+
+  <div>
+    <p>Do you want allow this to post in community</p>
+    <form action="/submit-result" method="POST">
+      <input type="hidden" name="resultId" value="<%= resultId %>">
+      <button type="submit" name="action" value="yes">Yes</button>
+      <button type="submit" name="action" value="no">No</button>
+    </form>
+  </div>
   <script>
-    const stats = <%- JSON.stringify(result.statistics) %>;
+      const stats = <%- JSON.stringify(result.statistics) %>;
+      // expose resultId both as a window property and a global var so external scripts can access it
+      window.resultId = '<%= resultId %>';
+      var resultId = '<%= resultId %>';
   </script>
   <script src="js/chart-script.js">  
-  </script>
+</script>
 </body>
 </html>
