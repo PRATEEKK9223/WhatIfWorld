@@ -16,8 +16,6 @@ import { v2 as cloudinaryV2 } from 'cloudinary';
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-console.log(process.env.CLOUDINARY_API_KEY, "in app.js");
-
 
 
 const __filename = fileURLToPath(import.meta.url);
