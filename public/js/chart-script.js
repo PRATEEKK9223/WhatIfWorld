@@ -124,6 +124,19 @@ barCanvas.toBlob(async (barBlob) => {
   });
 });
 
+// PDF Download
+document.getElementById('downloadPDF').addEventListener('click', async () => {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
+  const content = document.querySelector('.container');
+  const canvas = await html2canvas(content, { scale: 2 });
+  const imgData = canvas.toDataURL('image/png');
+  const imgProps = pdf.getImageProperties(imgData);
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  pdf.save('scenario-result.pdf');
+});
 
 
 

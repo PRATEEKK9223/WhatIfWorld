@@ -6,6 +6,10 @@
   <title>What If World - Scenario Result</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="css/chart.css">
+  <!-- For coverting the PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
 <body>
   <div class="container">
@@ -47,12 +51,12 @@
   <hr>
 
   <div>
-    <p>Do you want allow this to post in community</p>
     <form action="/submit-result" method="POST">
       <input type="hidden" name="resultId" value="<%= resultId %>">
-      <button type="submit" name="action" value="yes">Yes</button>
-      <button type="submit" name="action" value="no">No</button>
+      <button type="submit" name="action" value="yes">🌍 Share in community</button>
+      <button type="submit" name="action" value="no">🔙 Go back</button>
     </form>
+    <button id="downloadPDF">🧾 Download result</button>
   </div>
   <script>
       const stats = <%- JSON.stringify(result.statistics) %>;
