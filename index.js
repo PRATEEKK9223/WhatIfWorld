@@ -197,4 +197,17 @@ app.post("/submit-result",async(req,res)=>{
 });
 
 
+// For signUP
+
+app.get("/signUp",(req,res)=>{
+    res.render("signUp");
+});
+
+app.post("/signUp",(req,res)=>{
+
+});
+
+
+
+
 
