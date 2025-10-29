@@ -18,10 +18,11 @@ const upload = multer({ storage: multer.memoryStorage() });
 // import asyncWrap from "./utils/asyncWrap.js";
 import customError from "./utils/customError.js";
 
-// importing the routes
+// importing the routers
 import requestRoutes from "./routes/requestsRoutes.js";
 import cloudinaryRoutes from "./routes/cloudinaryRoutes.js";
 import communityRoutes from "./routes/communityRoutes.js";
+import localAuthRoutes from "./routes/AuthRoutes/localAuthRoutes.js";
 
 
 // posport for authentication
@@ -82,64 +83,20 @@ mongoose.connect(process.env.MONGO_URL).then(res=>{
 // cerebras clint routes
 app.use("/",requestRoutes);
 
-
-
 // cloudinary routes
 app.use("/",cloudinaryRoutes);
-
 
 // community routes
 app.use("/",communityRoutes);
 
-
-
-
-
 // ---------------------------AUTHENTICATION ROUTES--------------------
+app.use("/",localAuthRoutes);
 
-app.get("/signUp",(req,res)=>{
-    res.render("Authentication/signUp");
+// home route
+app.get("/",(req,res)=>{
+    res.render("./Components/home");
 });
 
-app.post("/signUp",async (req,res)=>{
-    try{
-      const {username,email,password}=req.body;
-      const user=new User({username,email});
-      let RegisteredUser=await User.register(user,password);
-      req.login(RegisteredUser,(err)=>{
-        if(err){
-          console.log(err);
-          res.send("Some error occurred during login after sign up.");
-        }else{
-           res.redirect("/scenario");
-        }
-      })
-
-    }catch(err){
-      console.log(err);
-       res.send("Some error occurred during sign up.",err);
-    }  
-});
-
-app.get("/login",(req,res)=>{
-    res.render("Authentication/login");
-});
-
-app.post("/login",passport.authenticate("local",{
-    successRedirect:"/scenario",
-    failureRedirect:"/login"
-}));
-
-app.get("/logout",(req,res)=>{
-   req.logout((err)=>{
-    if(err){
-        console.log(err);
-        res.send("Some error occurred during logout.");
-    }else{
-        res.redirect("/login");
-    }
-   })
-});
 
 
 // Catch-all for invalid routes (404)
