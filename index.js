@@ -84,8 +84,6 @@ app.get("/scenario",(req,res)=>{
 app.post("/scenario",asyncWrap(async(req,res)=>{
     let scenario=req.body.scenario;
     let domain=req.body.domain;
-    // console.log(req.body);
-    // try{
      const client = new Cerebras({
         apiKey: process.env.CEREBRAS_API_KEY, // This is the default and can be omitted
       });
@@ -140,19 +138,14 @@ app.post("/scenario",asyncWrap(async(req,res)=>{
   // persist result and then render the result page with the saved document id
   const newResult = new Result(result);
   await newResult.save();
-  // console.log('Result saved to DB:', newResult._id);
   res.render("./Components/result", { result, resultId: newResult._id });
-// }catch(err){
-    // console.log(err);
-    // res.send("Some error occurred");
-// }
 }));
 
 
 
 
-app.post('/upload-chart', upload.fields([{ name: 'barChart' }, { name: 'pieChart' }]), async (req, res) => {
-  try {
+app.post('/upload-chart', upload.fields([{ name: 'barChart' }, { name: 'pieChart' }]), asyncWrap(async (req, res) => {
+  // try {
     const bar = req.files['barChart'][0];
     const pie = req.files['pieChart'][0];
 
@@ -178,7 +171,8 @@ app.post('/upload-chart', upload.fields([{ name: 'barChart' }, { name: 'pieChart
     const resultId = req.body && req.body.resultId;
     if (!resultId) {
       console.error('upload-chart: missing resultId in request body');
-      return res.status(400).json({ error: 'Missing resultId' });
+      // return res.status(400).json({ error: 'Missing resultId' });
+      throw new customError(400, 'Missing resultId(server problem)');
     }
 
     // Update the same document with image URLs
@@ -196,18 +190,15 @@ app.post('/upload-chart', upload.fields([{ name: 'barChart' }, { name: 'pieChart
       barChartUrl: barUpload.secure_url,
       pieChartUrl: pieUpload.secure_url
     });
-  } catch (err) {
-    console.error('Cloudinary upload failed:', err);
-    res.status(500).json({ error: 'Upload failed' });
-  }
-});
+  // } catch (err) {
+  //   console.error('Cloudinary upload failed:', err);
+  //   res.status(500).json({ error: 'Upload failed' });
+  // }
+}));
 
-app.post("/submit-result",async(req,res)=>{
+app.post("/submit-result",asyncWrap(async(req,res)=>{
     const { resultId, action } = req.body;
-    // const allPost=await Result.find({});
-    // console.log("All posts:", allPost);
    if(action === 'yes'){
-     try {
        // avoid duplicate shares for the same result
        const existing = await Community.findOne({ result: resultId });
        if (!existing) {
@@ -218,14 +209,10 @@ app.post("/submit-result",async(req,res)=>{
        // fetch all community posts with populated results to render
        const posts = await Community.find({}).sort({ sharedAt: -1 }).populate('result');
        return res.render('./Components/community', { posts });
-     } catch (err) {
-       console.error('Error saving community post:', err);
-       return res.status(500).send('Failed to save community post');
-     }
    }else{
     res.render(`./Components/scenario`);
    }
-});
+}));
 
 
 // ---------------------------AUTHENTICATION ROUTES--------------------
