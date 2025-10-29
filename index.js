@@ -285,7 +285,6 @@ app.use((err,req,res,next)=>{
   console.log(err);
   const status = err.status || 500;
   const message = err.message || "Internal Server Error";
-  console.log("@@@@@@@@@@@@@",status,message);
   if(status===404){
     return res.status(404).render("./Error/404",{err});
   }else{
