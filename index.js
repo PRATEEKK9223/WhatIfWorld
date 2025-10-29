@@ -78,14 +78,21 @@ mongoose.connect(process.env.MONGO_URL).then(res=>{
 
 
 
+
 // cerebras clint routes
 app.use("/",requestRoutes);
+
+
 
 // cloudinary routes
 app.use("/",cloudinaryRoutes);
 
+
 // community routes
 app.use("/",communityRoutes);
+
+
+
 
 
 // ---------------------------AUTHENTICATION ROUTES--------------------
