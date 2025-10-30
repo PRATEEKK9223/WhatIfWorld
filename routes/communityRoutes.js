@@ -27,4 +27,6 @@ router.get("/community",asyncWrap(async(req,res)=>{
     const posts = await Community.find({}).sort({ sharedAt: -1 }).populate('result');
     res.render("./Components/community",{posts});   
 }));
+
+
 export default router;
