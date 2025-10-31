@@ -23,6 +23,7 @@ import requestRoutes from "./routes/requestsRoutes.js";
 import cloudinaryRoutes from "./routes/cloudinaryRoutes.js";
 import communityRoutes from "./routes/communityRoutes.js";
 import localAuthRoutes from "./routes/AuthRoutes/localAuthRoutes.js";
+import googleAuthRoutes from "./routes/AuthRoutes/googleAuthRoutes.js";
 
 
 // posport for authentication
@@ -30,6 +31,7 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import User from "./Models/user.js" ;
+import "./googleCloudConfig.js";
 
 app.use(session({
   secret: 'valgar',
@@ -91,6 +93,8 @@ app.use("/",communityRoutes);
 
 // ---------------------------AUTHENTICATION ROUTES--------------------
 app.use("/",localAuthRoutes);
+
+app.use("/",googleAuthRoutes);
 
 // home route
 app.get("/",(req,res)=>{

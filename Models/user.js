@@ -9,6 +9,17 @@ const UserSchema=new mongoose.Schema({
         required:true,
         unique:true
     },
+    googleId:{
+        type:String,
+        unique:true,
+        sparse:true
+    },
+    username:{
+        type:String,
+    },
+    photo:{
+        type:String,    
+    }
 });
 
 UserSchema.plugin(passportLocalMongoose);
