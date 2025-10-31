@@ -3,12 +3,13 @@ const router= express.Router();
 import Result from "../Models/result.js";
 import Cerebras from '@cerebras/cerebras_cloud_sdk';
 import asyncWrap from "../utils/asyncWrap.js";
+import {validateScenario} from "../utils/validationScenario.js";
 
 router.get("/scenario",(req,res)=>{
     res.render("./Components/scenario");
 });
 
-router.post("/scenario",asyncWrap(async(req,res)=>{
+router.post("/scenario",validateScenario,asyncWrap(async(req,res)=>{
     let scenario=req.body.scenario;
     let domain=req.body.domain;
      const client = new Cerebras({

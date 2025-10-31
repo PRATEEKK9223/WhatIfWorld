@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error</title>
+
+  <!-- Simple Inline CSS (you can move this to error.css later) -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f6f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .error-container {
+      width: 400px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 32px 24px;
+      animation: fadeIn 0.3s;
+    }
+    h2 {
+      color: #e63946;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    a {
+      text-decoration: none;
+      background: #0077cc;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: 0.2s;
+    }
+    a:hover {
+      background: #005fa3;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="error-container">
+    <h2>⚠️ Error Occurred</h2>
+    <p><%= message %></p>
+    <a href="/">Try Again</a>
+  </div>
+</body>
+</html>
