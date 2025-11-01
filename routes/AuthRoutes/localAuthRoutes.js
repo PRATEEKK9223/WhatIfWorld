@@ -3,13 +3,14 @@ const router =express.Router();
 import passport from "passport";
 import User from "../../Models/user.js";
 import asyncWrap from "../../utils/asyncWrap.js";
+import {signUpSchemaValidation} from "../../utils/joiValidation.js";
 
 
 router.get("/signUp",(req,res)=>{
     res.render("Authentication/signUp");
 });
 
-router.post("/signUp",asyncWrap(async (req,res)=>{
+router.post("/signUp",signUpSchemaValidation,asyncWrap(async (req,res)=>{
       const {username,email,password}=req.body;
       const user=new User({username,email});
       let RegisteredUser=await User.register(user,password);

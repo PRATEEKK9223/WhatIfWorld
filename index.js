@@ -46,12 +46,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Configure passport to use local strategy with User model
-passport.use(new LocalStrategy(User.authenticate()));
+// passport.use(new LocalStrategy(User.authenticate()));
+passport.use(User.createStrategy());
 
 // Serialize and deserialize user for session persistence
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
+passport.serializeUser((user, done) => {
+  done(null, user.id); // ✅ Store only user._id in session
+});
+
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  done(null, user); // ✅ Load fresh user from DB
+});
 
 
 

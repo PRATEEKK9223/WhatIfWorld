@@ -32,18 +32,18 @@ export async function validateScenario(req, res, next) {
           role: "system",
           content: `
           You are a scenario validation assistant.
-          Respond ONLY in JSON:
-          { "is_valid": true/false, "reason": "short explanation" }
+            A valid "What if" scenario must:
+            Describe a hypothetical situation
+            Allow for multiple outcomes
 
-          Rules:
-        - Scenario MUST start with "What if"
-        - Scenario MUST express a hypothetical idea
-        - Grammar mistakes, domain confusion, or short phrasing are acceptable
-        - Do NOT reject just because the scenario is uncommon or not fully detailed
-        - Reject only if the text is:
-          * Random (e.g., "abcd1234")
-          * Greeting or unrelated small talk (e.g., "hi", "how are you")
-          * No hypothetical change (e.g., "What if what if what if")
+            Do NOT judge realism, feasibility, probability, or morality.
+            Even unrealistic scenarios are valid.
+
+            Respond ONLY in JSON:
+            {
+              "is_valid": true/false,
+              "reason": "Clear explanation when is_valid = false"
+            }
           `
         },
         {
