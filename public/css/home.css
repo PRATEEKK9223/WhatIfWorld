@@ -1,0 +1,11 @@
+body { 
+    font-family: 'Inter', sans-serif; 
+}
+
+.hero {
+    padding: 80px 0;
+}
+
+.how-it-works-icon {
+    font-size: 45px;
+}

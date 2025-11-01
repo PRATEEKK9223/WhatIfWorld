@@ -16,6 +16,8 @@ import multer from 'multer';
 const upload = multer({ storage: multer.memoryStorage() });
 
 import flash from "connect-flash";
+import ejsMate from "ejs-mate";
+app.engine("ejs",ejsMate);
 
 
 // import asyncWrap from "./utils/asyncWrap.js";
@@ -85,6 +87,7 @@ app.set("views",path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
 
 
@@ -123,7 +126,7 @@ app.use("/",googleAuthRoutes);
 
 // home route
 app.get("/",(req,res)=>{
-    res.render("./Components/home");
+    res.render("./Components/home",{title: "Home - WhatIfWorld"});
 });
 
 

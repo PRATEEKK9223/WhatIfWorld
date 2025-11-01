@@ -1,17 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
-</head>
+<%- layout('layouts/boilerplate')%>
 <body>
-    <h>home page</h>
-    <p>this is a what if world web app where it will predict about the future
-        and also it will have a community page where people can share their ideas about the future</p>
-    <a href="/signUp">SignUp</a>
-    <a href="/login">Login</a>
-    <a href="/scenario">Scenario</a>
-    <a href="/community">Community</a>
+    <section class="hero container text-center text-md-start">
+        <div class="d-flex align-items-center mb-3">
+            <img src="/images/logo.svg" width="50" class="me-3">
+            <div>
+                <h3 class="m-0 fw-bold">WhatIfWorld</h3>
+                <small class="text-muted">Explore What-If Scenarios with AI</small>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="fw-bold display-5">Predict the Future of What-If Scenarios</h1>
+                <p class="text-secondary mt-3">
+                    Enter a scenario. Get realistic AI-powered predictions.
+                </p>
+                <div class="mt-4">
+                    <a href="/scenario" class="btn btn-primary btn-lg me-2">Explore Now</a>
+                    <a href="/community" class="btn btn-outline-primary btn-lg">View Community</a>
+                </div>
+            </div>
+            <div class="col-md-6 text-center mt-4 mt-md-0">
+                <img src="/images/tv.svg" class="img-fluid" width="350">
+            </div>
+        </div>
+    </section>
+    <section class="container text-center mt-4">
+        <h2 class="fw-bold fs-1 text-start">How It Works</h2>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="how-it-works-icon text-primary">
+                    <img src="/images/bulb.svg" width="200">
+                </div>
+                <p class="fw-semibold fs-3">Enter your ‘What if?’</p>
+            </div>
+            <div class="col-md-4">
+                <div class="how-it-works-icon text-primary">
+                    <img src="/images/chart.svg" width="200">
+                </div>
+                <p class="fw-semibold fs-3">AI predicts outcomes & charts</p>
+            </div>
+            <div class="col-md-4">
+                <div class="how-it-works-icon text-primary">
+                    <img src="/images/earth.svg" width="200">
+                </div>
+                <p class="fw-semibold fs-3">Share & discuss globally</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container mt-5">
+        <h2 class="fw-bold mb-4">Examples</h2>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="card p-3 shadow-sm">
+                    <h5>What if electric vehicles reach 90% by 2040?</h5>
+                    <p class="text-secondary">AI predicts EVs will reduce emissions by 35%</p>
+                    <a href="/scenario" class="btn btn-outline-primary mt-auto">Try This Scenario</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-3 shadow-sm">
+                    <h5>What if rainfall reduces by 20%?</h5>
+                    <p class="text-secondary">AI predicts a 12% drop in food supply</p>
+                    <a href="/scenario" class="btn btn-outline-primary">Try This Scenario</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-3 shadow-sm">
+                    <h5>What if Bitcoin becomes global currency?</h5>
+                    <p class="text-secondary">AI predicts $100,000 stabilization</p>
+                    <a href="/scenario" class="btn btn-outline-primary">Try This Scenario</a>
+                </div>
+            </div>
+             <div class="col-md-4">
+                <div class="card p-3 shadow-sm">
+                    <h5>What if Bitcoin becomes global currency?</h5>
+                    <p class="text-secondary">AI predicts $100,000 stabilization</p>
+                    <a href="/scenario" class="btn btn-outline-primary">Try This Scenario</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3 shadow-sm">
+                    <h5>What if Bitcoin becomes global currency?</h5>
+                    <p class="text-secondary">AI predicts $100,000 stabilization</p>
+                    <a href="/scenario" class="btn btn-outline-primary">Try This Scenario</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-3 shadow-sm">
+                    <h5>What if Bitcoin becomes global currency?</h5>
+                    <p class="text-secondary">AI predicts $100,000 stabilization</p>
+                    <a href="/scenario" class="btn btn-outline-primary">Try This Scenario</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </body>
-</html>

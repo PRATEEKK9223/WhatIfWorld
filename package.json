@@ -20,6 +20,7 @@
   "dependencies": {
     "@cerebras/cerebras_cloud_sdk": "^1.50.0",
     "@google/genai": "^1.25.0",
+    "bootstrap": "^5.3.8",
     "chart.js": "^4.5.1",
     "cloudinary": "^2.8.0",
     "connect-flash": "^0.1.1",
