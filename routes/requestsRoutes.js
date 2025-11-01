@@ -67,7 +67,7 @@ router.post("/scenario",validateScenario,asyncWrap(async(req,res)=>{
   // persist result and then render the result page with the saved document id
   const newResult = new Result(result);
   await newResult.save();
-  res.render("./Components/result", { result, resultId: newResult._id });
+  res.render("./Components/result", { result, resultId: newResult._id,title:"What-If Scenario Result"});
 
 }));
 

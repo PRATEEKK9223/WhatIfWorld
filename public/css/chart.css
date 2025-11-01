@@ -42,3 +42,59 @@
       color: #374151;
       text-align: center;
     }
+
+    /* for buttons  */
+
+  #buttons{
+      width:50%;
+      height:200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap:15px;
+      background-color:#f3f4f6;
+      padding:20px;
+      border-radius:12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn{
+      background-color:#3A84F7;
+      color:white;
+      border:none;
+      padding:10px 20px;
+      border-radius:8px;
+      font-size:16px;
+      cursor:pointer;
+      transition: background-color 0.3s ease;
+  }
+  .btn:hover{
+    opacity:0.8;
+    border:solid 2px #1E40AF;
+  }
+
+  @media (max-width: 600px) {
+    /* .container {
+      padding: 15px;
+    } */
+
+    canvas {
+      height: 250px;
+    }
+
+    #buttons{
+      width:100%;
+      height:auto;
+      padding:15px;    
+  }
+  #buttons form{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+  }
+  }
+

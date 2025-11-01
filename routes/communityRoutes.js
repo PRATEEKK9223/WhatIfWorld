@@ -18,7 +18,7 @@ router.post("/submit-result",asyncWrap(async(req,res)=>{
        const posts = await Community.find({}).sort({ sharedAt: -1 }).populate('result');
        return res.render('./Components/community', { posts });
    }else{
-    res.render(`./Components/scenario`);
+    res.render(`./Components/scenario`,{title:"What-If Scenario Prediction"});
    }
 }));
 

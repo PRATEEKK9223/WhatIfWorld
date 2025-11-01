@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What If World - Scenario Result</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="css/chart.css">
-  <!-- For coverting the PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<%- layout('layouts/boilerplate') %>
+ <!-- THis is for result page -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/chart.css"> 
 
-</head>
 <body>
   <div class="container">
     <h2>Scenario: <%= result.textual_analysis.scenario %></h2>
@@ -37,26 +29,27 @@
 
     <div class="section">
       <h3 class="chart-title">Statistical Impact Overview with bar chart</h3>
-      <canvas id="scenarioChart"></canvas>
+      <canvas id="scenarioChart" class="img-fluid"></canvas>
     </div>
 
     <hr>
 
     <div class="section">
       <h3 class="chart-title">Statistical Impact Overview with Pie chart</h3>
-      <canvas id="scenarioChart-pie" width="500" height="500"></canvas>
-    </div>
+      <div class="d-flex justify-content-center">
+        <canvas id="scenarioChart-pie" width="500"  class="img-fluid"></canvas>
+      </div>
   </div>
 
   <hr>
 
-  <div>
-    <form action="/submit-result" method="POST">
-      <input type="hidden" name="resultId" value="<%= resultId %>">
-      <button type="submit" name="action" value="yes">🌍 Share in community</button>
-      <button type="submit" name="action" value="no">🔙 Go back</button>
+  <div id="buttons">
+    <form action="/submit-result" method="POST" id="Twobtn">
+      <input type="hidden" name="resultId" value="<%= resultId %>" >
+      <button type="submit" name="action" value="yes" class="btn">🌍 Share in community</button>
+      <button type="submit" name="action" value="no" class="btn">🔙 Go back</button>
     </form>
-    <button id="downloadPDF">🧾Download result</button>
+    <button id="downloadPDF" class="btn">🧾Download result</button>
   </div>
   <script>
       const stats = <%- JSON.stringify(result.statistics) %>;
@@ -66,5 +59,8 @@
   </script>
   <script src="js/resultScript.js">  
 </script>
+<!-- For coverting the PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
-</html>
+
