@@ -7,7 +7,7 @@ import {validateScenario} from "../utils/validationScenario.js";
 import {isLoggedIn} from "../utils/middlewares.js";
 
 router.get("/scenario",isLoggedIn,(req,res)=>{
-    res.render("./Components/scenario");
+    res.render("./Components/scenario",{title:"What-If Scenario Prediction"});
 });
 
 router.post("/scenario",validateScenario,asyncWrap(async(req,res)=>{

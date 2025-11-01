@@ -1,27 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scenario</title>
-</head>
+<%- layout('layouts/boilerplate')%>
 <body>
-    <h1>What If World</h1>
-    <form action="/scenario" method="POST">
-        <div>
-            <label for="scenario">Enter your scenario:</label><br>
-            <textarea id="scenario" name="scenario" rows="4" cols="50"></textarea><br>
-            <input type="radio" name="domain" value="all" checked> All<br>
-            <input type="radio" name="domain" value="health"> Health<br>
-            <input type="radio" name="domain" value="education"> Education<br>
-            <input type="radio" name="domain" value="environment"> Environment<br>
-            <input type="radio" name="domain" value="technology"> Technology<br>
-            <input type="radio" name="domain" value="economy"> Economy<br>
-            <input type="radio" name="domain" value="society"> Society<br>
-            <input type="radio" name="domain" value="politics"> Politics<br>
-            
-            <button type="submit">Submit</button>
-        </div>
+  <div class="container py-5">
+    <h1 class="text-center mb-2">Explore What-If Scenarios</h1>
+    <p class="text-center text-muted mb-4">
+      Enter a scenario and explore AI-powered predictions about the future.
+    </p>
+
+    <!-- Scenario Form -->
+    <form action="/scenario" method="POST" class="text-center mb-5">
+      <div class="mb-4">
+        <textarea id="scenario" name="scenario" rows="3" class="form-control mx-auto" style="max-width:600px;" placeholder="e.g. What if petrol is banned in India by 2026?" required></textarea>
+      </div>
+
+      <div class="d-flex flex-wrap justify-content-center mb-3" id="categoryButtons">
+        <button type="button" class="category-btn active" data-value="all">All</button>
+        <button type="button" class="category-btn" data-value="health">Health</button>
+        <button type="button" class="category-btn" data-value="education">Education</button>
+        <button type="button" class="category-btn" data-value="environment">Environment</button>
+        <button type="button" class="category-btn" data-value="technology">Technology</button>
+        <button type="button" class="category-btn" data-value="economy">Economy</button>
+        <button type="button" class="category-btn" data-value="society">Society</button>
+        <button type="button" class="category-btn" data-value="politics">Politics</button>
+      </div>
+
+      <input type="hidden" name="domain" id="selectedDomain" value="all">
+
+      <button type="submit" class="btn btn-primary px-4 py-2">Predict Outcome</button>
     </form>
+
+    <!-- Featured Trending Scenario -->
+    <div class="trending-card mb-4">
+      <h5 class="fw-bold mb-1 fs-3">Trending Scenario</h5>
+      <h6 class="mb-1 ">What if AI takes over 50% of jobs?</h6>
+      <p class="text-muted mb-2">AI predicts massive shifts in workforce skill demands.</p>
+      <p><strong>Domain:-</strong>Technology</p>
+      <p><strong>Probability:-</strong><span class="probability-box">60%</span></p>
+      <div class="d-flex justify-content-between align-items-center">
+        <img src="https://res.cloudinary.com/dotutigv9/image/upload/v1761997139/WhatIfWorld-Charts/barChart.png" alt="Bar-graph" class="img-fluid chart-image">
+      </div>
+    </div>
+
+    <!-- Trending Scenarios Grid -->
+    <h5 class="fw-bold mb-3 fs-3">More Trending Scenarios</h5>
+    <div class="row">
+      <div class="col-md-6 col-lg-4">
+        <div class="trending-card">
+          <h6>What if world temperature rises by 2°C?</h6>
+          <p class="text-muted mb-2">AI predicts major sea-level rise and food scarcity.</p>
+          <p><strong>Domain:-</strong>Environment</p>
+          <p><strong>Probability:-</strong><span class="probability-box"> 70%</span></p>
+          <div class="d-flex justify-content-between align-items-center">
+             <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="trending-card">
+          <h6>What if universal basic income is adopted?</h6>
+          <p class="text-muted mb-2">AI predicts better social equity and higher spending.</p>
+          <p><strong>Domain:-</strong>Economy</p>
+          <p><strong>Probability:-</strong><span class="probability-box">60%</span></p>
+          <div class="d-flex justify-content-between align-items-center">
+             <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="trending-card">
+          <h6>What if solar energy becomes free for everyone?</h6>
+          <p class="text-muted mb-2">AI predicts 50% increase in renewable energy adoption.</p>
+          <p><strong>Domain:-</strong>Technology</p>
+          <p><strong>Probability:-</strong><span class="probability-box">60%</span></p>
+          <div class="d-flex justify-content-between align-items-center">
+             <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="trending-card">
+          <h6>What if petrol is banned in India by 2026?</h6>
+          <p class="text-muted mb-2">AI predicts EV surge, lower emissions, and job shifts.</p>
+          <p><strong>Domain:-</strong>Technology</p>
+          <p><strong>Probability:-</strong><span class="probability-box">60%</span></p>
+          <div class="d-flex justify-content-between align-items-center">
+             <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
-</html>

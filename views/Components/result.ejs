@@ -15,7 +15,7 @@
   <div class="container">
     <h2>Scenario: <%= result.textual_analysis.scenario %></h2>
     <p><strong>Domain:</strong> <%= result.textual_analysis.domain %></p>
-    <p><strong>Probability:</strong> <mark><%= result.textual_analysis.probability %>%</mark> </p>
+    <p><strong>Probability:</strong> <span class="probability-box"><%= result.textual_analysis.probability %>%</span> </p>
 
     <div class="section">
       <h3>Key Implications:</h3>
