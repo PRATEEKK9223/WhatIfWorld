@@ -4,8 +4,9 @@ import Result from "../Models/result.js";
 import Cerebras from '@cerebras/cerebras_cloud_sdk';
 import asyncWrap from "../utils/asyncWrap.js";
 import {validateScenario} from "../utils/validationScenario.js";
+import {isLoggedIn} from "../utils/middlewares.js";
 
-router.get("/scenario",(req,res)=>{
+router.get("/scenario",isLoggedIn,(req,res)=>{
     res.render("./Components/scenario");
 });
 

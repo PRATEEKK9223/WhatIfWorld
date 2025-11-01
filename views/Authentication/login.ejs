@@ -6,6 +6,11 @@
     <title>Login</title>
 </head>
 <body>
+    <% if(error_msg.length){ %>
+        <div>
+            <%=error_msg%>
+        </div>
+    <%}%>
     <h>Login</h>
     <form action="/login" method="POST">
         <div>

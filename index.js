@@ -15,6 +15,9 @@ import multer from 'multer';
 // import { v2 as cloudinaryV2 } from 'cloudinary';
 const upload = multer({ storage: multer.memoryStorage() });
 
+import flash from "connect-flash";
+
+
 // import asyncWrap from "./utils/asyncWrap.js";
 import customError from "./utils/customError.js";
 
@@ -39,6 +42,11 @@ app.use(session({
   saveUninitialized: true,
   cookie: { maxAge: 600000 }
 }));
+
+// enabling the flash messages
+app.use(flash());
+
+
 
 // ---------------------------PASSPORT CONFIGURATION-----------------
 // Initialize passport and session support
@@ -89,6 +97,14 @@ mongoose.connect(process.env.MONGO_URL).then(res=>{
 });
 
 
+// ------middleware for local storage of flash messages------
+
+app.use((req,res,next)=>{
+    res.locals.success_msg=req.flash("success");
+    res.locals.error_msg=req.flash("error");
+    res.locals.currentUser=req.user;
+    next();
+})
 
 
 // cerebras clint routes
