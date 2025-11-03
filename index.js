@@ -29,6 +29,7 @@ import cloudinaryRoutes from "./routes/cloudinaryRoutes.js";
 import communityRoutes from "./routes/communityRoutes.js";
 import localAuthRoutes from "./routes/AuthRoutes/localAuthRoutes.js";
 import googleAuthRoutes from "./routes/AuthRoutes/googleAuthRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 
 
 // posport for authentication
@@ -124,9 +125,20 @@ app.use("/",localAuthRoutes);
 
 app.use("/",googleAuthRoutes);
 
+app.use("/",profileRoutes);
+
 // home route
 app.get("/",(req,res)=>{
     res.render("./Components/home",{title: "Home - WhatIfWorld"});
+});
+
+
+// app.get("/profile",(req,res)=>{
+//     res.render("Authentication/profile",{title: "Profile - WhatIfWorld"});
+// });
+
+app.get("/edit-profile",(req,res)=>{
+    res.render("Authentication/editProfile",{title: "Edit Profile - WhatIfWorld"});
 });
 
 

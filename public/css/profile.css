@@ -1,0 +1,94 @@
+/* profile.css - WhatIfWorld profile page (light mode) */
+
+/* Page base */
+body {
+  background-color: #ffffff;
+  color: #212529;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+}
+
+/* container width (keeps page centered) */
+.container {
+  max-width: 900px;
+}
+
+/* Header */
+.brand h3 {
+  font-weight: 700;
+  margin: 0;
+}
+.brand small {
+  display: block;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Profile Section - layout handled by bootstrap cols; styling here */
+.profile-section { 
+  /* spacing above/below */
+}
+
+/* Left side (image + edit button) */
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* left aligned */
+  gap: 10px;
+}
+
+.profile-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f1f1f1;
+  display: block;
+}
+
+/* Make sure button looks like in the design */
+.btn-outline-dark {
+  border-radius: 8px;
+  border: 1px solid #d1d1d1;
+  padding: .5rem 1rem;
+  font-weight: 600;
+  color: #111;
+}
+.btn-outline-dark:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* Right side (user info) */
+.profile-right h4 { font-size: 1.6rem; margin-bottom: .25rem; }
+.profile-right p { margin: 0; color: #555; }
+
+/* Bio */
+.bio-section h5 { font-weight: 600; margin-bottom: .75rem; }
+.bio-section p { color: #555; line-height: 1.6; }
+
+/* Posts grid cards */
+.post-card {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  height: 160px;
+  border: 1px solid rgba(0,0,0,0.03);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.post-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  /* On medium/smaller screens, keep image centered stacking nicely */
+  .profile-left { align-items: center; text-align: center; }
+  .profile-right { text-align: center; margin-top: 0.5rem; }
+}
+
+@media (max-width: 575.98px) {
+  .container { padding-left: 16px; padding-right: 16px; }
+  .profile-img { width: 110px; height: 110px; }
+  .post-card { height: 140px; }
+}

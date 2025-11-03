@@ -1,0 +1,74 @@
+<%- layout("layouts/boilerplate")%>
+<link rel="stylesheet" href="/css/editProfile.css">
+
+<body>
+  <div class="container py-5">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="d-flex align-items-center">
+        <img src="/images/logo.svg" alt="Logo" width="50" class="me-3">
+        <div>
+          <h3 class="m-0 fw-bold">WhatIfWorld</h3>
+          <small class="text-muted">Explore What-If Scenarios with AI</small>
+        </div>
+      </div>
+      <a href="/logout" class="text-decoration-none fw-semibold">Logout</a>
+    </div>
+
+    <!-- Profile Edit Card -->
+    <div class="card border-0 shadow-sm p-4 mx-auto" style="max-width: 550px;">
+      <div class="text-center mb-4">
+        <img src="<%=user.photo%>" alt="Profile Picture" class="rounded-circle mb-3 profile-img" width="120" height="120">
+        <div>
+          <h4 class="fw-semibold mb-1"><%=user.username%></h4>
+          <p class="text-muted mb-1"><%=user.email%></p>
+          <p class="text-muted small">
+            <%if(user.dateOfBirth){ %>
+              <%=user.dateOfBirth.toDateString()%>
+            <%}%>
+          </p>
+        </div>
+      </div>
+      <form action="/edit-profile" method="POST" enctype="multipart/form-data">
+        <div class="mb-2 text-center">
+          <label for="profileUpload" class="btn btn-outline-dark px-4 py-2">Change profile picture</label>
+          <input type="file" id="profileUpload" class="d-none" name="photo">
+        </div>
+        <div class="mb-3">
+          <label for="username" class="form-label fw-semibold">Username</label>
+          <input type="text" class="form-control" id="username" name="username" value="<%=user.username%>">
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Email</label>
+          <input type="email" class="form-control" id="email" name="email" value="<%=user.email%>" readonly>
+        </div>
+
+        <div class="mb-3">
+          <label for="dob" class="form-label fw-semibold">Date of birth</label>
+          <input type="date" class="form-control" id="dob" name="dateOfBirth" value="<%=user.dateOfBirth%>" >
+        </div>
+
+        <div class="mb-3">
+          <label for="bio" class="form-label fw-semibold">Bio</label>
+          <textarea class="form-control" id="bio" name="bio" rows="3"><%=user.bio%></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mt-2">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Preview uploaded profile image
+    const input = document.getElementById('profileUpload');
+    const img = document.querySelector('.profile-img');
+    if (input) {
+      input.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) img.src = URL.createObjectURL(file);
+      });
+    }
+  </script>
+</body>
+</html>

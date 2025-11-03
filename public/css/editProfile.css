@@ -1,0 +1,42 @@
+body {
+  background-color: #f8f9fa;
+  font-family: "Inter", sans-serif;
+}
+
+.card {
+  border-radius: 20px;
+  background-color: #fff;
+}
+
+.profile-img {
+  object-fit: cover;
+}
+
+.btn-outline-dark {
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+.btn-outline-dark:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.form-control {
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+textarea {
+  resize: none;
+}
+
+@media (max-width: 576px) {
+  .card {
+    padding: 1.5rem !important;
+  }
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+}
