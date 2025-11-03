@@ -7,7 +7,7 @@ import {signUpSchemaValidation} from "../../utils/joiValidation.js";
 
 
 router.get("/signUp",(req,res)=>{
-    res.render("Authentication/signUp");
+    res.render("Authentication/signUp",{title:"Sign Up | WhatIfWorld"});
 });
 
 router.post("/signUp",signUpSchemaValidation,asyncWrap(async (req,res)=>{
@@ -22,10 +22,11 @@ router.post("/signUp",signUpSchemaValidation,asyncWrap(async (req,res)=>{
            res.redirect("/scenario");
         }
       });
-}));
+}));  
+
 
 router.get("/login",(req,res)=>{
-    res.render("Authentication/login");
+    res.render("Authentication/login",{title:"Login | WhatIfWorld"});
 });
 
 router.post("/login",passport.authenticate("local",{

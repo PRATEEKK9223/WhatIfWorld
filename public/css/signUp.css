@@ -1,0 +1,108 @@
+ body {
+      background-color: #f8f9fb;
+      font-family: 'Inter', sans-serif;
+    }
+    .signup-container {
+      max-width: 40%;
+      margin: 60px auto;
+      background: #fff;
+      padding: 40px 35px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .logo img {
+      width: 36px;
+      height: 36px;
+      margin-right: 10px;
+    }
+    h3 {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+    .form-control {
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .input-group-text {
+      border-radius: 10px;
+      background-color: #f8f9fa;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background-color: #0d6efd;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      padding: 12px;
+      width: 100%;
+    }
+    .btn-google {
+      border: 1px solid #dee2e6;
+      background-color: #fff;
+      border-radius: 10px;
+      width: 100%;
+      padding: 10px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-google img {
+      width: 22px;
+    }
+    .login-text {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 15px;
+    }
+    .login-text a {
+      color: #0d6efd;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .login-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* for responsive layouts */
+
+    /* Make the signup form responsive */
+.signup-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive logo and text alignment */
+.signup-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+@media (max-width: 1000px) {
+  .signup-container {
+    max-width: 90%;
+    margin: 2rem auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .signup-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .signup-container h3 {
+    font-size: 1.5rem;
+  }
+}

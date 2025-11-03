@@ -93,5 +93,10 @@
     justify-content: center;
     align-items: center;
   }
+
+  #scenarioChart{
+     width:50%;
+    height:auto;
+  }
   }
 
