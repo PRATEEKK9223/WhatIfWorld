@@ -6,12 +6,14 @@ import {isLoggedIn} from "../utils/middlewares.js";
 import multer from "multer";
 const upload = multer({ storage: multer.memoryStorage() });
 import cloudinary from "../cloudinaryConfig.js";
+import Community from "../Models/community.js"
 
 
 router.get("/profile/:id",isLoggedIn,asyncWrap(async(req,res)=>{
     const user=await User.findById(req.params.id);
-    // console.log(user);
-    res.render("Authentication/profile",{title: "Profile - WhatIfWorld",user});
+    const userPosts=await Community.find({author:req.user._id}).populate("result").sort({ sharedAt: -1 });
+    console.log(userPosts);
+    res.render("Authentication/profile",{title: "Profile - WhatIfWorld",user,userPosts});
 }));
 
 router.get("/edit-profile",isLoggedIn,asyncWrap(async(req,res)=>{
