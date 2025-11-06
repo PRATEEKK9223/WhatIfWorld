@@ -29,7 +29,7 @@ router.post("/scenario",validateScenario,asyncWrap(async(req,res)=>{
                       "textual_analysis": {
                         "scenario": "string",
                         "domain": "string",
-                        "probability": number,
+                        "probability": number (between 0 and 100, rounded to two decimals),
                         "key_implications": ["string", "string", ...],
                         "potential_challenges": ["string", "string", ...]
                       },
@@ -40,6 +40,8 @@ router.post("/scenario",validateScenario,asyncWrap(async(req,res)=>{
                         "Metric4": number
                       }
                     }
+                      Always provide numeric values between 0–100, no exponents or scientific notation.
+                     - Probability represents how plausible this scenario is relative to our current world.
 
                     The response should change dynamically based on the domain provided.
                     Use domain-specific metrics. Example domains include:
@@ -57,12 +59,21 @@ router.post("/scenario",validateScenario,asyncWrap(async(req,res)=>{
                 content: `Scenario: ${scenario}\nDomain: ${domain}`
             }
           ],
-          model: "llama-4-scout-17b-16e-instruct",
+          model: "llama-3.3-70b",
           response_format: { type: "json_object" }
 });
 
-    const result = JSON.parse(completion.choices[0].message.content);
-    result.textual_analysis.probability*=100;  
+      console.log(completion.choices[0].message.content);
+    // const result = JSON.parse(completion.choices[0].message.content);
+      let result;
+      try {
+          result = JSON.parse(completion.choices[0].message.content);
+      } catch (err) {
+          console.error("❌ JSON parse failed. Raw output:", completion.choices[0].message.content);
+          console.error(err);
+          return res.status(500).send("Model returned invalid JSON");
+      }
+    // result.textual_analysis.probability*=100;  
   
   // persist result and then render the result page with the saved document id
   const newResult = new Result(result);

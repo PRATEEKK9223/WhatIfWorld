@@ -24,7 +24,9 @@
           <div class="profile-left text-start">
             <img src="<%=user.photo%>" alt="Profile Picture" class="profile-img mb-3">
             <div>
-              <a href="/edit-profile" class="btn btn-outline-dark d-inline-block">Edit Profile</a>
+                <% if (user._id.toString() === currentUser._id.toString()) { %>
+                  <a href="/edit-profile" class="btn btn-outline-dark d-inline-block">Edit Profile</a>
+                <% } %>
             </div>
           </div>
         </div>

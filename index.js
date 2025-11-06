@@ -108,7 +108,7 @@ app.use((req,res,next)=>{
     res.locals.error_msg=req.flash("error");
     res.locals.currentUser=req.user;
     next();
-})
+});
 
 
 // cerebras clint routes

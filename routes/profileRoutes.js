@@ -8,9 +8,9 @@ const upload = multer({ storage: multer.memoryStorage() });
 import cloudinary from "../cloudinaryConfig.js";
 
 
-router.get("/profile",isLoggedIn,asyncWrap(async(req,res)=>{
-    const user=await User.findById(req.user._id);
-    console.log(user);
+router.get("/profile/:id",isLoggedIn,asyncWrap(async(req,res)=>{
+    const user=await User.findById(req.params.id);
+    // console.log(user);
     res.render("Authentication/profile",{title: "Profile - WhatIfWorld",user});
 }));
 
@@ -18,8 +18,6 @@ router.get("/edit-profile",isLoggedIn,asyncWrap(async(req,res)=>{
     const user=await User.findById(req.user._id);
     res.render("Authentication/editProfile",{title: "Edit Profile - WhatIfWorld",user});
 }));
-
-
 
 
 router.post("/edit-profile",isLoggedIn,upload.single("photo"),asyncWrap(async (req,res)=>{
@@ -44,12 +42,13 @@ router.post("/edit-profile",isLoggedIn,upload.single("photo"),asyncWrap(async (r
             stream.end(req.file.buffer); // upload file buffer
     });
 
+
     // Save the Cloudinary URL to user.photo
     user.photo = result.secure_url;
   }
     await user.save();
     req.flash("success","Profile updated successfully");
-    res.redirect("/profile");
+    res.redirect(`/profile/${user._id}`);
 }));
 
 export default router;

@@ -26,7 +26,7 @@ export async function validateScenario(req, res, next) {
     });
 
     const validationResponse = await client.chat.completions.create({
-      model: "llama-4-scout-17b-16e-instruct",
+      model: "llama-3.3-70b",
       messages: [
         {
           role: "system",
@@ -69,3 +69,6 @@ export async function validateScenario(req, res, next) {
     return res.render("./Error/error", { message: "AI validation failed. Try again later." });
   }
 }
+
+
+
