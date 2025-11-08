@@ -13,12 +13,12 @@ router.get("/profile/:id",isLoggedIn,asyncWrap(async(req,res)=>{
     const user=await User.findById(req.params.id);
     const userPosts=await Community.find({author:req.user._id}).populate("result").sort({ sharedAt: -1 });
     // console.log(userPosts);
-    res.render("Authentication/profile",{title: "Profile - WhatIfWorld",user,userPosts});
+    res.render("Authentication/profile",{title: "Profile - WhatIfWorld",user,userPosts,activePage:"profile"});
 }));
 
 router.get("/edit-profile",isLoggedIn,asyncWrap(async(req,res)=>{
     const user=await User.findById(req.user._id);
-    res.render("Authentication/editProfile",{title: "Edit Profile - WhatIfWorld",user});
+    res.render("Authentication/editProfile",{title: "Edit Profile - WhatIfWorld",user,activePage:"Edit-profile"});
 }));
 
 
