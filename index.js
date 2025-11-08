@@ -129,7 +129,7 @@ app.use("/",profileRoutes);
 
 // home route
 app.get("/",(req,res)=>{
-    res.render("./Components/home",{title: "Home - WhatIfWorld"});
+    res.render("./Components/home",{title: "Home - WhatIfWorld",activePage: "home"});
 });
 
 

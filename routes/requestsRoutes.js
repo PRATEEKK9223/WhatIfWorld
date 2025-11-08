@@ -63,7 +63,7 @@ router.post("/scenario",validateScenario,asyncWrap(async(req,res)=>{
           response_format: { type: "json_object" }
 });
 
-      console.log(completion.choices[0].message.content);
+      // console.log(completion.choices[0].message.content);
     // const result = JSON.parse(completion.choices[0].message.content);
       let result;
       try {
@@ -78,7 +78,7 @@ router.post("/scenario",validateScenario,asyncWrap(async(req,res)=>{
   // persist result and then render the result page with the saved document id
   const newResult = new Result(result);
   await newResult.save();
-  res.render("./Components/result", { result, resultId: newResult._id,title:"What-If Scenario Result"});
+  res.render("./Components/result", { result, resultId: newResult._id,title:"What-If Scenario Result",activePage:"result"});
 
 }));
 

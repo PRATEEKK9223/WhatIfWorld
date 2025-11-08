@@ -19,9 +19,9 @@ router.post("/submit-result",asyncWrap(async(req,res)=>{
        }
        // fetch all community posts with populated results to render
        const posts = await Community.find({}).sort({ sharedAt: -1 }).populate('result').populate('author');
-       return res.render('./Components/community', { title:"community-WhatIfWorld",posts });
+       return res.render('./Components/community', { title:"community-WhatIfWorld",posts ,activePage:"community"});
    }else{
-    res.render(`./Components/scenario`,{title:"What-If Scenario Prediction"});
+    res.render(`./Components/scenario`,{title:"What-If Scenario Prediction",activePage:"explore"});
    }
 }));
 
