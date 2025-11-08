@@ -75,3 +75,42 @@
   }
 }
 
+/* Adding the underline for active link in header */
+
+
+.nav-link {
+  position: relative;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #d9534f; /* Red underline */
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover {
+  color: #d9534f;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Active page underline stays visible */
+.active-link::after {
+  width: 100%;
+}
+.active-link {
+  color: #d9534f !important;
+}
+
+

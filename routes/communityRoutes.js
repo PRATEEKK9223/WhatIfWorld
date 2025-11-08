@@ -29,7 +29,7 @@ router.post("/submit-result",asyncWrap(async(req,res)=>{
 router.get("/community",asyncWrap(async(req,res)=>{
     const posts = await Community.find({}).sort({ sharedAt: -1 }).populate('result').populate('author');
     //  console.log(posts);
-    res.render("./Components/community",{title:"community-WhatIfWorld",posts});   
+    res.render("./Components/community",{title:"community-WhatIfWorld",posts,activePage: "community"});   
 }));
 
 
