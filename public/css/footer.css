@@ -1,0 +1,28 @@
+.footer {
+  background-color: var(--footer-bg,#fff);
+  color: var(--footer-text,#000);
+
+}
+.footer a.footer-link {
+  color: var(--footer-link, #121212);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer .text-muted {
+  color: var(--footer-muted, #A0A0A0) !important;
+}
+
+/* Light Mode Support */
+.light-mode .footer {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.light-mode .footer a.footer-link {
+  color: #555;
+}
+
+.footer .icon i:hover{
+    color:#000;
+}

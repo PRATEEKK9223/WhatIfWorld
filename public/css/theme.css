@@ -218,3 +218,14 @@ body.dark-mode .category-btn:hover{
 .dark-mode .hamburger{
     color:#fff;
 }
+
+/* footer */
+
+.dark-mode .footer{
+  background-color: var(--footer-bg,#000);
+  color: var(--footer-text,#fff);
+}
+
+.dark-mode .footer .icon i:hover{
+    color:#fff;
+}

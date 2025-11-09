@@ -53,6 +53,7 @@
     </form>
     <button id="downloadPDF" class="btn">🧾Download result</button>
   </div>
+  <%- include('../partials/footer') %>
   <script>
       const stats = <%- JSON.stringify(result.statistics) %>;
       // expose resultId both as a window property and a global var so external scripts can access it
