@@ -1,0 +1,220 @@
+/* For theme toggling */
+
+/* Default Light Mode */
+body {
+  background-color: #ffffff;
+  color: #212529;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar {
+  background-color: #ffffff !important;
+  transition: background-color 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #f1f1f1;
+}
+
+body.dark-mode .navbar {
+  background-color: #1e1e1e !important;
+}
+
+body.dark-mode a,
+body.dark-mode .nav-link {
+  color: #f1f1f1 !important;
+}
+
+body.dark-mode .btn-outline-secondary {
+  color: #f1f1f1;
+  border-color: #f1f1f1;
+}
+
+body.dark-mode .btn-outline-secondary:hover {
+  background-color: #f1f1f1;
+  color: #121212;
+}
+
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+body.dark-mode .form-control {
+  background-color: #2a2a2a;
+  color: #fff;
+  border-color: #444;
+}
+
+  * {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+
+/* FOr header */
+
+/* Navbar and header adjustments */
+body.dark-mode .navbar,
+body.dark-mode header {
+  background-color: #1e1e1e !important;
+  border-bottom: 1px solid #333;
+}
+
+body.dark-mode .navbar-brand h3,
+body.dark-mode .navbar-brand small,
+body.dark-mode .nav-link,
+body.dark-mode .fw-semibold {
+  color: #f1f1f1 !important;
+}
+
+body.dark-mode .nav-link:hover {
+  color: #0d6efd !important; /* blue hover still visible on dark */
+}
+
+
+/* Fix Blue Buttons (#0d6efd) for Dark Background */
+
+/* Button adjustments in dark mode */
+body.dark-mode .btn-primary {
+  background-color: #4e9eff;
+  border-color: #4e9eff;
+  color: #fff;
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #72b3ff;
+  border-color: #72b3ff;
+}
+
+/* Outline button (Login, etc.) */
+body.dark-mode .btn-outline-primary {
+  border-color: #4e9eff;
+  color: #4e9eff;
+}
+
+body.dark-mode .btn-outline-primary:hover {
+  background-color: #4e9eff;
+  color: #fff;
+}
+
+
+/* Fix Page Text and Background */
+
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark-mode p,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode small {
+  color: #f5f5f5 !important;
+}
+
+/* Explore page */
+
+body.dark-mode .category-btn{
+    background-color: #1e1e1e ;
+    color:#fff;
+}
+body.dark-mode .category-btn:hover{
+    background-color: #4e9eff;
+    color: #fff;
+}
+
+.dark-mode ::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+.dark-mode .trending-card {
+    background-color: #1e1e1e ;
+    color:white;
+}
+
+/* For Login page */
+
+.dark-mode .login{
+    background-color: #1e1e1e ;
+    color:#fff;
+}
+
+.dark-mode .btn-google{
+    background-color: #1e1e1e ;
+    color:#fff;
+}
+
+.dark-mode .btn-google:hover{
+    background-color: #1e1e1e ;
+    border:1px solid #fff;
+    opacity:0.5;
+}
+
+.dark-mode .signup-container{
+    background-color: #1e1e1e ;
+    color:#fff;
+}
+
+/* For Result page */
+
+.dark-mode .result{
+    background-color: #1e1e1e ;
+    color:#fff;
+}
+
+/* For community page */
+
+.dark-mode .modal-content{
+     background-color: #1e1e1e ;
+    color:#fff;
+}
+
+.dark-mode .delete{
+     background-color: #000;
+    color:#fff;
+}
+.dark-mode .delete:hover, .delete li a:hover{
+     background-color: red;
+    color:#fff;
+}
+
+
+/* profile side bar */
+
+.dark-mode .profile-sidebar{
+    background-color: #1e1e1e ;
+    color:#fff;
+}
+
+
+.dark-mode .list-unstyled li:hover a{
+     background-color: #174f37 ;
+}
+
+/* profile page */
+.dark-mode .profile{
+    background-color:#000 ;
+    color:#fff;
+}
+
+/* .dark-mode .profile-section, .bio-section{
+    background-color: #1e1e1e ;
+    color:#fff;
+} */
+
+.dark-mode .editimg{
+    color:#fff;
+    background-color: #3A84F7;;
+}
+
+
+.dark-mode .hamburger{
+    color:#fff;
+}

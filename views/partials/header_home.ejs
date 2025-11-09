@@ -11,7 +11,7 @@
     </div>
 
     <!-- Mobile toggle -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+    <button class="navbar-toggler hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <i class="bi bi-list fs-2"></i>
     </button>
 
@@ -19,7 +19,14 @@
     <div class="collapse navbar-collapse justify-content-end" id="navMenu">
       <ul class="navbar-nav align-items-center">
         <li class="nav-item mx-2"><a href="/about" class="nav-link fw-semibold">About Us</a></li>
-        <li class="nav-item mx-2"><a href="/theme" class="nav-link fw-semibold">Theme</a></li>
+        <!-- <li class="nav-item mx-2"><a href="/theme" class="nav-link fw-semibold">Theme</a></li> -->
+         <!-- Theme Toggle -->
+          <li class="theme-toggle ms-3">
+            <button id="themeToggle" class="btn btn-outline-secondary rounded-circle me-5">
+              <i id="themeIcon" class="bi bi-moon"></i>
+            </button>
+          </li>
+
 
         <% if (!currentUser) { %>
           <!-- Show login/signup inside collapse on mobile -->
