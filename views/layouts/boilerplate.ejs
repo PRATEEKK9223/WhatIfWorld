@@ -10,8 +10,18 @@
     <link rel="stylesheet" href="/css/header.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/flash.css">
 </head>
 <body>
+    <% if (typeof activePage !== 'undefined') { %>
+        <% if (activePage === "home") { %>
+            <%- include('../partials/header_home') %>
+        <% } else { %>
+            <%- include('../partials/header_internals') %>
+        <% } %>
+    <% } %>
+      <%- include('../partials/flash') %>
+
     <%-body%>
         
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>

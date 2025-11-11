@@ -39,17 +39,16 @@ import { Strategy as LocalStrategy } from "passport-local";
 import User from "./Models/user.js" ;
 import "./googleCloudConfig.js";
 
+
 app.use(session({
   secret: 'valgar',
   resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 600000 }
+  saveUninitialized: false,
+  cookie: { maxAge: 600000}
 }));
 
 // enabling the flash messages
 app.use(flash());
-
-
 
 // ---------------------------PASSPORT CONFIGURATION-----------------
 // Initialize passport and session support
@@ -104,11 +103,13 @@ mongoose.connect(process.env.MONGO_URL).then(res=>{
 // ------middleware for local storage of flash messages------
 
 app.use((req,res,next)=>{
-    res.locals.success_msg=req.flash("success");
-    res.locals.error_msg=req.flash("error");
+    res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
+    res.locals.info=req.flash("info");
     res.locals.currentUser=req.user;
     next();
 });
+
 
 
 // cerebras clint routes

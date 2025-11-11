@@ -24,7 +24,10 @@ const signUpSchemaValidation =(req,res,next)=>{
     console.log(error);
     if(error){
         const errorMessages=error.details.map(detail=>detail.message);
-        return res.status(400).render("./Error/error",{message: errorMessages.join(", ")});
+        console.log(errorMessages);
+        // return res.status(400).render("./Error/error",{message: errorMessages.join(", ")});
+        req.flash("error",errorMessages);
+        return res.redirect("/singUp");
     }
     next();  
 }

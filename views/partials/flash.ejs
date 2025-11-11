@@ -1,0 +1,34 @@
+
+<% if (success && success.length > 0) { %>
+  <div class="alert alert-success  fade show custom-flash" role="alert">
+    <i class="bi bi-check-circle-fill me-2"></i>
+    <%= success[0] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<% if (error && error.length > 0) { %>
+  <div class="alert alert-danger  fade show custom-flash" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+    <%= error[0] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<% if (info && info.length > 0) { %>
+  <div class="alert alert-info  fade show custom-flash" role="alert">
+    <i class="bi bi-info-circle-fill me-2"></i>
+    <%= info[0] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<script>
+  setTimeout(() => {
+    document.querySelectorAll('.custom-flash').forEach(flash => {
+      flash.classList.remove('show');
+      flash.classList.add('fade');
+      setTimeout(() => flash.remove(), 500);
+    });
+  }, 9000);
+</script>

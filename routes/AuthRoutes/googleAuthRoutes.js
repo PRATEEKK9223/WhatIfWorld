@@ -9,10 +9,11 @@ router.get("/auth/google",
 
 router.get("/auth/google/callback",
     passport.authenticate("google", { 
-        failureRedirect: "/login"
+        failureRedirect: "/login", failureFlash: "Google authentication failed. Please try again!"
     }),
     (req, res) => {
-        res.redirect("/scenario"); // login success
+        req.flash("success","WellCome To WhatIFWorld")
+        res.redirect("/"); // login success
     }
 );
 

@@ -19,16 +19,17 @@ router.post("/submit-result",asyncWrap(async(req,res)=>{
        }
        // fetch all community posts with populated results to render
        const posts = await Community.find({}).sort({ sharedAt: -1 }).populate('result').populate('author');
-       return res.render('./Components/community', { title:"community-WhatIfWorld",posts ,activePage:"community"});
+       req.flash("success","Your prediction has been shared in Community");
+       return res.redirect('/community');
    }else{
-    res.render(`./Components/scenario`,{title:"What-If Scenario Prediction",activePage:"explore"});
+        req.flash("error", "Something went wrong. Please try again.");
+        return res.redirect(`/scenario`);
    }
 }));
 
 
 router.get("/community",asyncWrap(async(req,res)=>{
     const posts = await Community.find({}).sort({ sharedAt: -1 }).populate('result').populate('author');
-    //  console.log(posts);
     res.render("./Components/community",{title:"community-WhatIfWorld",posts,activePage: "community"});   
 }));
 
@@ -41,10 +42,11 @@ router.get("/delete/:id",isLoggedIn,asyncWrap(async(req,res)=>{
     }
     if(post.author.equals(req.user._id)){
         await Community.findByIdAndDelete(id);
-        console.log("deleted succesfully");
+        req.flash("success","Your Post Deleted Successfully");
         res.redirect("/community");
     }else{
-        res.send("you not author of this post");
+        req.flash("info","Your Not a Author to Delete");
+        res.redirect("/community");
     }
 }));
 

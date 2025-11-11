@@ -1,0 +1,76 @@
+/* ---------------------------
+   FLASH MESSAGE BASE STYLE
+---------------------------- */
+.custom-flash {
+  position: fixed;
+  top: 90px; /* nicely below your header */
+  left: 50%;
+  transform: translateX(-50%); /* ✅ centers it horizontally */
+  z-index: 2000;
+  min-width: 300px;
+  max-width: 600px;
+  border-radius: 12px;
+  font-weight: 500;
+  animation: fadeSlide 0.5s ease-in-out;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+
+/* Entry animation */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* ---------------------------
+   LIGHT THEME COLORS
+---------------------------- */
+body.light .alert-success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: none;
+}
+
+body.light .alert-danger {
+  background-color: #f8d7da;
+  color: #842029;
+  border: none;
+}
+
+body.light .alert-info {
+  background-color: #cff4fc;
+  color: #055160;
+  border: none;
+}
+
+/* ---------------------------
+   DARK THEME COLORS
+---------------------------- */
+body.dark .alert-success {
+  background-color: #1b3b2f;
+  color: #a3f2c6;
+  border: none;
+}
+
+body.dark .alert-danger {
+  background-color: #3d1e21;
+  color: #f8b7b7;
+  border: none;
+}
+
+body.dark .alert-info {
+  background-color: #16394d;
+  color: #b9ecff;
+  border: none;
+}
+
+/* Adjust close button in dark mode */
+body.dark .btn-close {
+  filter: invert(1);
+}
