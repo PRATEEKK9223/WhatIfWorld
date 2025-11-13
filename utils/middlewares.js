@@ -18,4 +18,13 @@ const saveRedirectUrl = (req, res, next) => {
     next();
 };
 
-export {isLoggedIn,saveRedirectUrl};
+const isLoggedInAjax = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    // Instead of redirecting, send JSON so the frontend can handle it
+     req.flash("info","You must be logged in first");
+    return res.status(401).json({ redirectUrl: "/login" });
+  }
+  next();
+};
+
+export {isLoggedIn,saveRedirectUrl,isLoggedInAjax};

@@ -3,6 +3,7 @@ const router= express.Router();
 import Community from "../Models/community.js";
 import asyncWrap from "../utils/asyncWrap.js";
 import {isLoggedIn} from "../utils/middlewares.js";
+import {isLoggedInAjax} from "../utils/middlewares.js";
 
 
 
@@ -29,7 +30,7 @@ router.post("/submit-result",asyncWrap(async(req,res)=>{
 
 
 router.get("/community",asyncWrap(async(req,res)=>{
-    const posts = await Community.find({}).sort({ sharedAt: -1 }).populate('result').populate('author');
+    const posts = await Community.find({}).sort({ sharedAt: -1 }).populate('result').populate('author').populate('comments.author', 'username photo'); ;
     res.render("./Components/community",{title:"community-WhatIfWorld",posts,activePage: "community"});   
 }));
 
@@ -48,6 +49,89 @@ router.get("/delete/:id",isLoggedIn,asyncWrap(async(req,res)=>{
         req.flash("info","Your Not a Author to Delete");
         res.redirect("/community");
     }
+}));
+
+// Like the post route
+router.post("/community/like/:id",isLoggedInAjax,asyncWrap(async(req,res)=>{
+    let {id}=req.params;
+    const post=await Community.findById(id);
+    if (!post) {
+        return res.status(404).json({ success: false, message: "Post not found" });
+    }
+    // Convert ObjectIds to strings before comparing
+    const userId = req.user._id.toString();
+    const index = post.likes.findIndex(like => like.toString() === userId);
+    let isLiked;
+    if(index === -1){
+        post.likes.push(req.user._id);
+        isLiked=true;
+    }else{
+        post.likes.splice(index,1);
+        isLiked=false;
+    }
+    await post.save();
+    // Sending the data to the frontend
+    res.json({success: true,isLiked,likeCount: post.likes.length});
+}));
+
+
+// comment 
+
+router.post("/community/comment/:id",isLoggedInAjax,asyncWrap(async(req,res)=>{
+    const {id}=req.params;
+    const {text}=req.body;
+    const post=await Community.findById(id);
+    if(!post){
+        res.status(400).json({success:false,message:"Post not found"});
+    }
+    if(!text || !text.trim()){
+        res.status(400).json({success:false,message:"Coment can not be empty"});
+    }
+
+    const comment={
+        text:text,
+        author:req.user._id,
+        createdAt:Date.now(),
+    }
+    post.comments.push(comment);
+    await post.save();
+    await post.populate("comments.author","username photo");
+    const newComment=post.comments[post.comments.length-1];
+    // this is to send the data instantly using Ajax without page reload
+    res.json({
+        success:true,
+        comment:{
+            id:newComment._id,
+            text:newComment.text,
+            author:{
+                username:newComment.author.username,
+                photo:newComment.author.photo,
+            },
+            createdAt:newComment.createdAt,
+        }
+    });
+
+}));
+
+
+// Comment delete route
+
+router.delete("/community/comment/:postId/:commentId", isLoggedIn, asyncWrap(async (req, res) => {
+  const { postId, commentId } = req.params;
+  const community = await Community.findById(postId).populate("comments.author");
+
+  const comment = community.comments.id(commentId);
+  if (!comment) return res.status(404).json({ success: false, message: "Comment not found" });
+
+  // Only author or admin can delete
+  if (comment.author._id.toString() !== req.user._id.toString()) {
+    return res.status(403).json({ success: false, message: "Unauthorized" });
+  }
+
+  comment.deleteOne(); // remove the comment
+  await community.save();
+
+  res.json({ success: true, commentId });
 }));
 
 

@@ -1,0 +1,38 @@
+/* ❤️ Pulse animation for like */
+@keyframes like-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.btn-like i.animate-like {
+  animation: like-pulse 0.3s ease;
+}
+
+
+
+/* comment  */
+
+.comment {
+  transition: all 0.2s ease-in-out;
+}
+
+.comment:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.hover-shadow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
