@@ -93,10 +93,14 @@ router.post("/community/comment/:id",isLoggedInAjax,asyncWrap(async(req,res)=>{
         author:req.user._id,
         createdAt:Date.now(),
     }
-    post.comments.push(comment);
+    // post.comments.push(comment);
+    post.comments.unshift(comment);
     await post.save();
     await post.populate("comments.author","username photo");
-    const newComment=post.comments[post.comments.length-1];
+
+
+    const newComment = post.comments[0];
+    // const newComment=post.comments[post.comments.length-1];
     // this is to send the data instantly using Ajax without page reload
     res.json({
         success:true,
