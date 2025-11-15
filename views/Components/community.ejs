@@ -28,6 +28,7 @@
                 <div>
                   <h6 class="mb-0 fw-semibold"><%= post.author.username %></h6>
                   <small class="text-secondary"><%= new Date(post.sharedAt).toLocaleString() %></small>
+                  
                 </div>
               </div>
               <div class="dropdown">
@@ -53,14 +54,16 @@
             <div class="d-flex justify-content-between align-items-center mt-3">
               <div class="post-actions">
                <button class="btn-like border-0 bg-transparent" data-id="<%= post._id %>">
-                  <i class="bi <%= post.likes.includes(currentUser?._id) ? 'bi-heart-fill text-danger' : 'bi-heart' %>"></i>
+                  <i class="bi <%= post.likes.includes(currentUser?._id) ? 'bi-heart-fill text-danger' : 'bi-heart' %> fs-5"></i>
                   <span><%= post.likes.length %></span>
                 </button>
-                <button data-bs-toggle="modal" data-bs-target="#commentModal<%= index %>" style="border:none ; background-color:#fff">
-                   <i class="bi bi-chat"></i> <span id="commentsCount-<%= post._id %>"><%= post.comments?.length || 0 %></span>
+                <button data-bs-toggle="modal" data-bs-target="#commentModal<%= index %>" style="border:none ;">
+                    <i class="bi bi-chat-left-text fs-5"></i> <span id="commentsCount-<%= post._id %>"><%= post.comments?.length || 0 %></span>
                 </button>
-                <!-- <i class="bi bi-chat"></i><span>24</span> -->
-                <i class="bi bi-arrow-90deg-right"></i>
+                <button class="btn btn-sm  open-share-modal" data-url="http://localhost:3000/community/<%= post._id %>" data-title="<%= post.result.title %>">
+                      <i class="bi bi-share-fill fs-5"></i>
+                </button>
+
               </div>
               <!-- View Full Button triggers modal -->
               <button class="btn btn-primary btn-view" data-bs-toggle="modal" data-bs-target="#viewModal<%= index %>">
@@ -240,6 +243,26 @@
   <% } %>
 </div>
 <%- include('../partials/footer') %>
+
+
+
+<!-- Share Modal -->
+<div id="shareModal" class="modal-backdrop-custom d-none">
+  <div class="share-modal-box">
+    
+    <h5 class="mb-3">Share this post</h5>
+
+    <div class="share-options">
+      <a class="share-opt" id="shareWhatsApp"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+      <a class="share-opt" id="shareFacebook"><i class="bi bi-facebook"></i> Facebook</a>
+      <a class="share-opt" id="shareTwitter"><i class="bi bi-twitter-x"></i> X (Twitter)</a>
+       <a class="share-opt" id="shareEmail"><i class="bi bi-envelope"></i></i> Email</a>
+      <a class="share-opt" id="shareCopy"><i class="bi bi-clipboard"></i> Copy Link</a>
+    </div>
+
+    <button id="closeShareModal" class="btn btn-dark w-100 mt-3">Close</button>
+  </div>
+</div>
 
 <script>
   window.CURRENT_USER_ID = "<%= currentUser ? currentUser._id : '' %>";

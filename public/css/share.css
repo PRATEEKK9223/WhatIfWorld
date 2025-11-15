@@ -1,0 +1,47 @@
+.modal-backdrop-custom {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.share-modal-box {
+  background: white;
+  padding: 20px;
+  width: 320px;
+  border-radius: 12px;
+  animation: pop 0.25s ease-out;
+}
+
+@keyframes pop {
+  0% {transform: scale(0.8); opacity: 0;}
+  100% {transform: scale(1); opacity: 1;}
+}
+
+.share-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.share-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.share-opt:hover {
+  background: #e9ecef;
+}
+
+#shareModal.d-none {
+  display: none !important;
+}

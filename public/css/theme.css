@@ -229,3 +229,39 @@ body.dark-mode .category-btn:hover{
 .dark-mode .footer .icon i:hover{
     color:#fff;
 }
+
+/* comment  */
+
+.dark-mode .comment{
+  background-color: #1e1e1e !important;
+  color:#fff;
+}
+
+.dark-mode .post-actions button{
+  background-color: #1e1e1e !important;
+}
+
+.dark-mode .post-actions button i{
+   background-color: #1e1e1e !important;
+  color:#fff;
+}
+
+.dark-mode .post-actions button span{
+  color:#fff;
+}
+
+.dark-mode .share-modal-box{
+  background-color: #1e1e1e !important;
+}
+
+.dark-mode .share-opt{
+   background-color:#4e9eff;
+}
+
+
+.dark-mode .share-opt:hover{
+   background-color:#4e9eff;
+   opacity:0.8;
+}
+
+

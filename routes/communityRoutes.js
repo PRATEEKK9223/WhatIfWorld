@@ -139,4 +139,21 @@ router.delete("/community/comment/:postId/:commentId", isLoggedIn, asyncWrap(asy
 }));
 
 
+// full post details  
+
+router.get("/community/:id", asyncWrap(async(req,res)=>{
+    const post = await Community.findById(req.params.id)
+      .populate("result")
+      .populate("author")
+      .populate("comments.author");
+
+    if(!post){
+        req.flash("error","Post not found");
+        return res.redirect("/community");
+    }
+
+    res.render("./Components/postDetails",{title:"Post Details",post});
+}));
+
+
 export default router;

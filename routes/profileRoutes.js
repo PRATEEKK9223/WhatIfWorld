@@ -10,8 +10,13 @@ import Community from "../Models/community.js"
 
 
 router.get("/profile/:id",isLoggedIn,asyncWrap(async(req,res)=>{
+    let {id} =req.params;
     const user=await User.findById(req.params.id);
-    const userPosts=await Community.find({author:req.user._id}).populate("result").sort({ sharedAt: -1 });
+    const userPosts=await Community.find({author:id})
+        .populate("result")
+        .populate('author', 'username photo')
+        .populate('comments.author','username photo')
+        .sort({ sharedAt: -1 });
     // console.log(userPosts);
     res.render("Authentication/profile",{title: "Profile - WhatIfWorld",user,userPosts,activePage:"profile"});
 }));

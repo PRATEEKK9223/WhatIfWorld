@@ -5,18 +5,6 @@
 <body class="bg-light profile">
   <div class="container-fuild py-5 profile  p-3">
 
-    <!-- Header (brand + logout) -->
-    <!-- <header class="d-flex justify-content-between align-items-center mb-4">
-      <div class="brand d-flex align-items-center">
-        <img src="/images/logo.svg" alt="Logo" width="50" class="me-2">
-        <div>
-          <h3 class="fw-bold mb-0">WhatIfWorld</h3>
-          <small class="text-muted">Explore What-If Scenarios with AI</small>
-        </div>
-      </div>
-      <a href="/logout" class="text-decoration-none fw-semibold text-dark">Logout</a>
-    </header> -->
-    <!-- Profile header: two-column layout -->
     <section class="profile-section mb-5">
       <div class="row w-100 align-items-center">
         <!-- LEFT: image + edit button -->
@@ -62,6 +50,7 @@
 <section class="posts-section">
     <h5 class="fw-semibold mb-3">Posts</h5>
     <!-- Community Posts -->
+ <!-- Community Posts -->
   <% if (typeof userPosts !== 'undefined' && userPosts.length > 0) { %>
     <div class="row g-4">
       <% userPosts.forEach((post, index) => { %>
@@ -69,13 +58,23 @@
           <div class="card border-0 shadow-sm rounded-4 p-3 h-100">
             <div class="d-flex justify-content-between align-items-start">
               <div class="d-flex align-items-center mb-2">
-                <a href="/profile/<%= user._id %>">
-                  <img src="<%= user.photo %>" class="rounded-circle me-2" width="40" height="40" alt="user">
+                <a href="/profile/<%= post.author.id %>">
+                  <img src="<%= post.author.photo %>" class="rounded-circle me-2" width="40" height="40" alt="user">
                 </a>
                 <div>
-                  <h6 class="mb-0 fw-semibold"><%= user.username %></h6>
+                  <h6 class="mb-0 fw-semibold"><%= post.author.username %></h6>
                   <small class="text-secondary"><%= new Date(post.sharedAt).toLocaleString() %></small>
+                  
                 </div>
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-sm text-secondary" type="button" data-bs-toggle="dropdown">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end delete">
+                  <!-- <li><a class="dropdown-item" href="#">Edit</a></li> -->
+                  <li><a class="dropdown-item" href="/delete/<%=post._id%>">Delete</a></li>
+                </ul>
               </div>
             </div>
 
@@ -90,9 +89,17 @@
             <!-- footer -->
             <div class="d-flex justify-content-between align-items-center mt-3">
               <div class="post-actions">
-                <i class="bi bi-heart"></i><span>128</span>
-                <i class="bi bi-chat"></i><span>24</span>
-                <i class="bi bi-arrow-90deg-right"></i>
+               <button class="btn-like border-0 bg-transparent" data-id="<%= post._id %>">
+                  <i class="bi <%= post.likes.includes(currentUser?._id) ? 'bi-heart-fill text-danger' : 'bi-heart' %> fs-5"></i>
+                  <span><%= post.likes.length %></span>
+                </button>
+                <button data-bs-toggle="modal" data-bs-target="#commentModal<%= index %>" style="border:none ;">
+                    <i class="bi bi-chat-left-text fs-5"></i> <span id="commentsCount-<%= post._id %>"><%= post.comments?.length || 0 %></span>
+                </button>
+                <button class="btn btn-sm  open-share-modal" data-url="http://localhost:3000/community/<%= post._id %>" data-title="<%= post.result.title %>">
+                      <i class="bi bi-share-fill fs-5"></i>
+                </button>
+
               </div>
               <!-- View Full Button triggers modal -->
               <button class="btn btn-primary btn-view" data-bs-toggle="modal" data-bs-target="#viewModal<%= index %>">
@@ -102,7 +109,7 @@
           </div>
         </div>
 
-          <!-- 🔹 Modal for Full Details -->
+        <!-- 🔹 Modal for Full Details -->
         <div class="modal fade" id="viewModal<%= index %>" tabindex="-1" aria-labelledby="viewModalLabel<%= index %>" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content rounded-4">
@@ -131,6 +138,133 @@
                 <% if (post.result.chartImages && post.result.chartImages.barChart) { %>
                   <img src="<%= post.result.chartImages.barChart %>" alt="chart" class="img-fluid rounded mt-3">
                 <% } %>
+
+                <!-- COMMENTS AREA -->
+                <hr>
+                <div class="comments-section mt-3">
+                  <h6 class="fw-semibold mb-2 mt-3">Comments(<span id="commentsCount-<%= post._id %>"><%= post.comments?.length || 0 %></span>)</h6>
+                  <div class="comment-list">
+                    <%if(post.comments && post.comments.length > 0) {%>
+
+                        <% post.comments.forEach(c => { %>
+                        <div class="comment mb-3 p-3 bg-light rounded-4 shadow-sm position-relative" id="comment-<%= c._id %>">
+                              <!-- Profile + Name + Date -->
+                              <div class="d-flex align-items-center mb-2">
+                                <a href="/profile/<%= c.author._id %>">
+                                  <img src="<%= c.author.photo %>" 
+                                      class="rounded-circle me-3 border border-2 border-white shadow-sm" 
+                                      width="30" height="30" alt="User">
+                                </a>
+                                <div class="d-flex flex-column">
+                                  <span class="fw-semibold">@<%= c.author.username.toLowerCase() %></span>
+                                  <small class="text-muted"><%= new Date(c.createdAt).toLocaleString() %></small>
+                                </div>
+                              </div>
+
+                              <!-- Comment text -->
+                              <p class="mb-0 ps-5 text-secondary"><%= c.text %></p>
+
+                              <!-- Three-dot menu (top-right corner) -->
+                              <% if (currentUser && c.author._id.equals(currentUser._id)) { %>
+                                <div class="dropdown position-absolute top-0 end-0 mt-2 me-2">
+                                  <button class="btn btn-sm text-muted" type="button" id="commentMenu<%= c._id %>" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                  </button>
+                                  <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="commentMenu<%= c._id %>">
+                                    <li>
+                                      <button class="dropdown-item text-danger delete-comment-btn"
+                                              data-postid="<%= post._id %>"
+                                              data-commentid="<%= c._id %>">
+                                        <i class="bi bi-trash me-2"></i> Delete
+                                      </button>
+                                    </li>
+                                  </ul>
+                                </div>
+                              <% } %>
+                            </div>
+
+                        <% }) %>
+                    <%}else {%>
+                        <p>No comments yet..........</p>
+                    <%}%>
+                  </div>  
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Comment modal -->
+
+        <div class="modal fade" id="commentModal<%= index %>" tabindex="-1" aria-labelledby="viewModalLabel<%= index %>" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content rounded-4">
+              <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="viewModalLabel<%= index %>">What if <%= post.result.textual_analysis.scenario %>?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <!-- COMMENTS AREA -->
+                <hr>
+                 <%if(currentUser){%>
+                  <form class="comment-form mt-2 d-flex" data-id="<%= post._id %>">
+                    <input type="text" class="form-control me-2 " placeholder="Write a comment..." required>
+                    <button class="btn btn-primary">Post</button>
+                  </form>
+                  <%}else {%>
+                    <p class="p-3"><a href="/login">login &nbsp;&nbsp;</a>to comment</p>
+                  <%}%>
+                <div class="comments-section mt-3">
+                  <h6 class="fw-semibold mb-2">Comments(<span id="commentsCount-<%= post._id %>"><%= post.comments?.length || 0 %></span>)</h6>
+                  <div class="comment-list" id="comments-<%= post._id %>">
+                    <%if(post.comments && post.comments.length > 0) {%>
+                    <% post.comments.forEach(c => { %>
+                     <div class="comment mb-3 p-3 bg-light rounded-4 shadow-sm position-relative" id="comment-<%= c._id %>">
+                          <!-- Profile + Name + Date -->
+                          <div class="d-flex align-items-center mb-2">
+                            <a href="/profile/<%= c.author._id %>">
+                              <img src="<%= c.author.photo %>" 
+                                  class="rounded-circle me-3 border border-2 border-white shadow-sm" 
+                                  width="30" height="30" alt="User">
+                            </a>
+                            <div class="d-flex flex-column">
+                              <span class="fw-semibold">@<%= c.author.username.toLowerCase() %></span>
+                              <small class="text-muted"><%= new Date(c.createdAt).toLocaleString() %></small>
+                            </div>
+                          </div>
+
+                          <!-- Comment text -->
+                          <p class="mb-0 ps-5 text-secondary"><%= c.text %></p>
+
+                          <!-- Three-dot menu (top-right corner) -->
+                          <% if (currentUser && c.author._id.equals(currentUser._id)) { %>
+                            <div class="dropdown position-absolute top-0 end-0 mt-2 me-2">
+                              <button class="btn btn-sm text-muted" type="button" id="commentMenu<%= c._id %>" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="commentMenu<%= c._id %>">
+                                <li>
+                                  <button class="dropdown-item text-danger delete-comment-btn"
+                                          data-postid="<%= post._id %>"
+                                          data-commentid="<%= c._id %>">
+                                    <i class="bi bi-trash me-2"></i> Delete
+                                  </button>
+                                </li>
+                              </ul>
+                            </div>
+                          <% } %>
+                        </div>
+
+                    <% }) %>
+                    <%}else {%>
+                        <p>No comments yet ........</p>
+                    <%}%>
+                  </div>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -144,8 +278,29 @@
     <p class="text-center text-secondary mt-4">No community posts yet.</p>
   <% } %>
 </div>
-</section>    
+</section>
+</div>
+
+
+
+
+<!-- Share Modal -->
+<div id="shareModal" class="modal-backdrop-custom d-none">
+  <div class="share-modal-box">
+    
+    <h5 class="mb-3">Share this post</h5>
+
+    <div class="share-options">
+      <a class="share-opt" id="shareWhatsApp"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+      <a class="share-opt" id="shareFacebook"><i class="bi bi-facebook"></i> Facebook</a>
+      <a class="share-opt" id="shareTwitter"><i class="bi bi-twitter-x"></i> X (Twitter)</a>
+       <a class="share-opt" id="shareEmail"><i class="bi bi-envelope"></i></i> Email</a>
+      <a class="share-opt" id="shareCopy"><i class="bi bi-clipboard"></i> Copy Link</a>
+    </div>
+
+    <button id="closeShareModal" class="btn btn-dark w-100 mt-3">Close</button>
   </div>
+</div>
 <%- include('../partials/footer') %>
   <!-- Small JS for profile image preview (optional) -->
   <script>

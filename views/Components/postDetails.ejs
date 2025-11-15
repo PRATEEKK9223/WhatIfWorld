@@ -1,0 +1,70 @@
+<%- layout('layouts/boilerplate')%>
+<div class="container mt-4">
+  <!-- Back button -->
+  <a href="/community" class="btn btn-secondary mb-3">← Back</a>
+
+  <!-- POST CARD -->
+  <div class="card shadow-sm p-3">
+
+    <!-- Scenario Result -->
+  <div class="col-md-6">
+          <div class="card border-0 shadow-sm rounded-4 p-3 h-100">
+            <div class="d-flex justify-content-between align-items-start">
+              <div class="d-flex align-items-center mb-2">
+                <a href="/profile/<%= post.author.id %>">
+                  <img src="<%= post.author.photo %>" class="rounded-circle me-2" width="40" height="40" alt="user">
+                </a>
+                <div>
+                  <h6 class="mb-0 fw-semibold"><%= post.author.username %></h6>
+                  <small class="text-secondary"><%= new Date(post.sharedAt).toDateString() %></small>  
+                </div>
+              </div>
+            </div>
+
+            <h5 class="fw-semibold mb-2">What if <%= post.result.textual_analysis.scenario %>?</h5>
+            <p class="text-secondary mb-2">Domain: <%= post.result.textual_analysis.domain %></p>
+            <p class="text-secondary mb-2">Probability: <%= post.result.textual_analysis.probability %>%</p>
+
+             <h6 class="fw-semibold mt-3">Key Implications</h6>
+                <ul>
+                  <% post.result.textual_analysis.key_implications.forEach(imp => { %>
+                    <li><%= imp %></li>
+                  <% }) %>
+                </ul>
+
+                <h6 class="fw-semibold mt-3">Potential Challenges</h6>
+                <ul>
+                  <% post.result.textual_analysis.potential_challenges.forEach(ch => { %>
+                    <li><%= ch %></li>
+                  <% }) %>
+                </ul>
+            <% if (post.result.chartImages && post.result.chartImages.barChart) { %>
+              <img src="<%= post.result.chartImages.barChart %>" alt="chart" class="img-fluid rounded mb-3">
+            <% } %>
+        </div>
+        </div>
+
+
+    <hr>
+
+    <!-- COMMENT SECTION -->
+    <h5 class="mb-3">Comments (<%= post.comments.length %>)</h5>
+    <!-- Comment List -->
+    <div id="full-comment-list">
+      <% post.comments.forEach(comment => { %> 
+        <div class="d-flex mb-3">
+        <a href="/profile/<%= comment.author._id %>">
+          <img src="<%= comment.author.photo %>" width="35" height="35" class="rounded-circle">
+          </a>
+
+          <div class="ms-2">
+            <strong><%= comment.author.username %></strong>
+            <small class="text-muted"> • <%= comment.createdAt.toDateString() %></small>
+            <p class="mb-0"><%= comment.text %></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+<%- include("../partials/footer") %>
