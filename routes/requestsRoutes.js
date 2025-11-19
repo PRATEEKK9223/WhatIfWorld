@@ -5,9 +5,13 @@ import Cerebras from '@cerebras/cerebras_cloud_sdk';
 import asyncWrap from "../utils/asyncWrap.js";
 import {validateScenario} from "../utils/validationScenario.js";
 import {isLoggedIn} from "../utils/middlewares.js";
+import Community from "../Models/community.js"
 
-router.get("/scenario",isLoggedIn,(req,res)=>{
-    res.render("./Components/scenario",{title:"What-If Scenario Prediction",activePage: "explore"});
+router.get("/scenario",isLoggedIn,async(req,res)=>{
+    const TrendPosts=await Community.find({}).sort({trendingScore: -1}).limit(10).populate("result");
+    const MostTrending=TrendPosts[0];
+    const Trending= TrendPosts.slice(1);
+    res.render("./Components/scenario",{title:"What-If Scenario Prediction",activePage: "explore",MostTrending,Trending});
 });
 
 router.post("/scenario",isLoggedIn,validateScenario,asyncWrap(async(req,res)=>{

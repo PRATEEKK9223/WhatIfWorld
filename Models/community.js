@@ -42,6 +42,18 @@ const communitySchema = new mongoose.Schema({
     }
   ],
   comments:[commentSchema],
+  views:{
+    type:Number,
+    default:0,
+  },
+  viewedIPs:{
+    type:[String],
+    default:[],
+  },
+  trendingScore:{
+    type:Number,
+    default:0,
+  }
 });
 
 const Community = mongoose.model('Community', communitySchema);

@@ -30,66 +30,32 @@
 
     <!-- Featured Trending Scenario -->
     <div class="trending-card mb-4">
-      <h5 class="fw-bold mb-1 fs-3">Trending Scenario</h5>
-      <h6 class="mb-1 ">What if AI takes over 50% of jobs?</h6>
-      <p class="text-muted mb-2">AI predicts massive shifts in workforce skill demands.</p>
-      <p><strong>Domain:-</strong>Technology</p>
-      <p><strong>Probability:-</strong><span class="probability-box">60%</span></p>
+      <h5 class="fw-bold mb-1 fs-3">Most Trending Scenario</h5>
+      <h6 class="mb-1 ">What if <%=MostTrending.result.textual_analysis.scenario%>?</h6>
+      <p class="text-muted mb-2"><%=MostTrending.result.textual_analysis.key_implications[0]%></p>
+      <p><strong>Domain:-</strong><%=MostTrending.result.textual_analysis.domain%></p>
+      <p><strong>Probability:-</strong><span class="probability-box"><%=MostTrending.result.textual_analysis.probability%>%</span></p>
       <div class="d-flex justify-content-between align-items-center">
-        <img src="https://res.cloudinary.com/dotutigv9/image/upload/v1761997139/WhatIfWorld-Charts/barChart.png" alt="Bar-graph" class="img-fluid chart-image">
+        <img src=<%=MostTrending.result.chartImages.barChart%> alt="Bar-graph" class="img-fluid chart-image">
       </div>
     </div>
 
     <!-- Trending Scenarios Grid -->
-    <h5 class="fw-bold mb-3 fs-3">More Trending Scenarios</h5>
+    <h5 class="fw-bold mb-3 fs-3">Trending Scenarios</h5>
     <div class="row">
-      <div class="col-md-6 col-lg-4">
-        <div class="trending-card">
-          <h6>What if world temperature rises by 2°C?</h6>
-          <p class="text-muted mb-2">AI predicts major sea-level rise and food scarcity.</p>
-          <p><strong>Domain:-</strong>Environment</p>
-          <p><strong>Probability:-</strong><span class="probability-box"> 70%</span></p>
-          <div class="d-flex justify-content-between align-items-center">
-             <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
+      <% Trending.forEach((post)=>{%>
+         <div class="col-md-6 col-lg-4">
+          <div class="trending-card">
+            <h6>What if <%=post.result.textual_analysis.scenario%>?</h6>
+            <p class="text-muted mb-2"><%=post.result.textual_analysis.key_implications[0]%></p>
+            <p><strong>Domain:-</strong><%=post.result.textual_analysis.domain%></p>
+            <p><strong>Probability:-</strong><span class="probability-box"> <%=post.result.textual_analysis.probability%>%</span></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="/community/<%=post._id%>" class="btn btn-outline-primary btn-sm">View Details</a>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="trending-card">
-          <h6>What if universal basic income is adopted?</h6>
-          <p class="text-muted mb-2">AI predicts better social equity and higher spending.</p>
-          <p><strong>Domain:-</strong>Economy</p>
-          <p><strong>Probability:-</strong><span class="probability-box">60%</span></p>
-          <div class="d-flex justify-content-between align-items-center">
-             <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="trending-card">
-          <h6>What if solar energy becomes free for everyone?</h6>
-          <p class="text-muted mb-2">AI predicts 50% increase in renewable energy adoption.</p>
-          <p><strong>Domain:-</strong>Technology</p>
-          <p><strong>Probability:-</strong><span class="probability-box">60%</span></p>
-          <div class="d-flex justify-content-between align-items-center">
-             <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="trending-card">
-          <h6>What if petrol is banned in India by 2026?</h6>
-          <p class="text-muted mb-2">AI predicts EV surge, lower emissions, and job shifts.</p>
-          <p><strong>Domain:-</strong>Technology</p>
-          <p><strong>Probability:-</strong><span class="probability-box">60%</span></p>
-          <div class="d-flex justify-content-between align-items-center">
-             <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
-          </div>
-        </div>
-      </div>
+        </div>   
+      <%})%>
     </div>
   </div>
 <%- include('../partials/footer') %>

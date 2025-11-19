@@ -4,6 +4,7 @@ import Community from "../Models/community.js";
 import asyncWrap from "../utils/asyncWrap.js";
 import {isLoggedIn} from "../utils/middlewares.js";
 import {isLoggedInAjax} from "../utils/middlewares.js";
+import {calculateTrendingScore} from "../utils/trendingScore.js"
 
 
 
@@ -69,6 +70,7 @@ router.post("/community/like/:id",isLoggedInAjax,asyncWrap(async(req,res)=>{
         post.likes.splice(index,1);
         isLiked=false;
     }
+    post.trendingScore=calculateTrendingScore(post);
     await post.save();
     // Sending the data to the frontend
     res.json({success: true,isLiked,likeCount: post.likes.length});
@@ -95,6 +97,7 @@ router.post("/community/comment/:id",isLoggedInAjax,asyncWrap(async(req,res)=>{
     }
     // post.comments.push(comment);
     post.comments.unshift(comment);
+     post.trendingScore=calculateTrendingScore(post);
     await post.save();
     await post.populate("comments.author","username photo");
 
@@ -155,5 +158,30 @@ router.get("/community/:id", asyncWrap(async(req,res)=>{
     res.render("./Components/postDetails",{title:"Post Details",post});
 }));
 
+
+// view increment Route
+
+router.post("/community/view/:id", async (req, res) => {
+  try {
+    const post = await Community.findById(req.params.id);
+    if (!post) return res.status(404).json({ success: false });
+
+    // Get Client IP
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+    // If same IP already viewed → do NOT count
+    if (!post.viewedIPs.includes(ip)) {
+      post.views += 1;
+      post.viewedIPs.push(ip);
+      post.trendingScore=calculateTrendingScore(post);
+      await post.save();
+    }
+
+    res.json({ success: true, views: post.views });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ success: false });
+  }
+});
 
 export default router;
