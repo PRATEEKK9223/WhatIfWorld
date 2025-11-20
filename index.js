@@ -30,6 +30,7 @@ import communityRoutes from "./routes/communityRoutes.js";
 import localAuthRoutes from "./routes/AuthRoutes/localAuthRoutes.js";
 import googleAuthRoutes from "./routes/AuthRoutes/googleAuthRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
+import aboutRoutes from "./routes/aboutRoutes.js";
 
 
 // posport for authentication
@@ -126,6 +127,8 @@ app.use("/",localAuthRoutes);
 app.use("/",googleAuthRoutes);
 
 app.use("/",profileRoutes);
+
+app.use("/",aboutRoutes);
 
 // home route
 app.get("/",(req,res)=>{

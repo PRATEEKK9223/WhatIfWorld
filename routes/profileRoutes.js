@@ -58,4 +58,5 @@ router.post("/edit-profile",isLoggedIn,upload.single("photo"),asyncWrap(async (r
     res.redirect(`/profile/${user._id}`);
 }));
 
+
 export default router;
