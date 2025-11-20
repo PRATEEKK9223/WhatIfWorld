@@ -7,12 +7,8 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
-// import Cerebras from '@cerebras/cerebras_cloud_sdk';
-// import Result from "./Models/result.js";
-// import Community from "./Models/community.js";
 import multer from 'multer';
-// import cloudinary from "./cloudinary-script.js";
-// import { v2 as cloudinaryV2 } from 'cloudinary';
+
 const upload = multer({ storage: multer.memoryStorage() });
 
 import flash from "connect-flash";
@@ -20,7 +16,6 @@ import ejsMate from "ejs-mate";
 app.engine("ejs",ejsMate);
 
 
-// import asyncWrap from "./utils/asyncWrap.js";
 import customError from "./utils/customError.js";
 
 // importing the routers
@@ -165,8 +160,6 @@ app.use((err,req,res,next)=>{
     });
   } 
 });
-
-
 
 
 
