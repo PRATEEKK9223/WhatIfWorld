@@ -14,6 +14,11 @@ router.get("/signUp",(req,res)=>{
 router.post("/signUp",signUpSchemaValidation,async (req,res)=>{
     try{
         const {username,email,password}=req.body;
+        const existingEmail = await User.findOne({ email });
+        if (existingEmail) {
+            req.flash("error", "Email is already registered. Please use a different email.");
+            return res.redirect("/signUp");
+        }
         const user=new User({username,email});
         let RegisteredUser=await User.register(user,password);
         req.login(RegisteredUser,(err)=>{

@@ -59,4 +59,17 @@ router.post("/edit-profile",isLoggedIn,upload.single("photo"),asyncWrap(async (r
 }));
 
 
+router.get("/myPredictions/:id",async(req,res)=>{
+        const {id} =req.params;
+     const userPosts=await Community.find({author:id})
+        .populate("result")
+        .populate('author', 'username photo')
+        .populate('comments.author','username photo')
+        .sort({ sharedAt: -1 });
+        console.log(userPosts);
+    res.render("Authentication/myPrediction",{title: "myPredictions - WhatIfWorld",userPosts,activePage:"myPrediction"});
+});
+
+
+
 export default router;

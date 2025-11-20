@@ -1,0 +1,146 @@
+<%- layout("layouts/boilerplate") %>
+
+<section class="posts-section">
+    <marquee direction="right" class="p-3 fs-2">My Predictions</marquee> 
+ <!-- Community Posts -->
+  <% if (typeof userPosts !== 'undefined' && userPosts.length > 0) { %>
+    <div class="row g-4">
+      <% userPosts.forEach((post, index) => { %>
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm rounded-4 p-3 h-100">
+            <div class="d-flex justify-content-between align-items-start">
+              <div class="d-flex align-items-center mb-2">
+                <a href="/profile/<%= post.author.id %>">
+                  <img src="<%= post.author.photo %>" class="rounded-circle me-2" width="40" height="40" alt="user">
+                </a>
+                <div>
+                  <h6 class="mb-0 fw-semibold"><%= post.author.username %></h6>
+                  <small class="text-secondary"><%= new Date(post.sharedAt).toLocaleString() %></small>
+                  
+                </div>
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-sm text-secondary" type="button" data-bs-toggle="dropdown">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end delete">
+                  <!-- <li><a class="dropdown-item" href="#">Edit</a></li> -->
+                  <li><a class="dropdown-item" href="/delete/<%=post._id%>">Delete</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <h5 class="fw-semibold mb-2">What if <%= post.result.textual_analysis.scenario %>?</h5>
+            <p class="text-secondary mb-2">Domain: <%= post.result.textual_analysis.domain %></p>
+            <p class="text-secondary mb-2">Probability: <%= post.result.textual_analysis.probability %>%</p>
+
+            <% if (post.result.chartImages && post.result.chartImages.barChart) { %>
+              <img src="<%= post.result.chartImages.barChart %>" alt="chart" class="img-fluid rounded mb-3">
+            <% } %>
+
+            <!-- footer -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <!-- View Full Button triggers modal -->
+              <button class="btn btn-primary btn-view" data-bs-toggle="modal" data-bs-target="#viewModal<%= index %>" data-id="<%=post._id%>">
+                View Full
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 🔹 Modal for Full Details -->
+        <div class="modal fade" id="viewModal<%= index %>" tabindex="-1" aria-labelledby="viewModalLabel<%= index %>" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content rounded-4">
+              <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="viewModalLabel<%= index %>">What if <%= post.result.textual_analysis.scenario %>?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p><strong>Domain:</strong> <%= post.result.textual_analysis.domain %></p>
+                <p><strong>Probability:</strong> <%= post.result.textual_analysis.probability %>%</p>
+
+                <h6 class="fw-semibold mt-3">Key Implications</h6>
+                <ul>
+                  <% post.result.textual_analysis.key_implications.forEach(imp => { %>
+                    <li><%= imp %></li>
+                  <% }) %>
+                </ul>
+
+                <h6 class="fw-semibold mt-3">Potential Challenges</h6>
+                <ul>
+                  <% post.result.textual_analysis.potential_challenges.forEach(ch => { %>
+                    <li><%= ch %></li>
+                  <% }) %>
+                </ul>
+
+                <% if (post.result.chartImages && post.result.chartImages.barChart) { %>
+                  <img src="<%= post.result.chartImages.barChart %>" alt="chart" class="img-fluid rounded mt-3">
+                <% } %>
+
+                <!-- COMMENTS AREA -->
+                <hr>
+                <div class="comments-section mt-3"> 
+                  <h6 class="fw-semibold mb-2 mt-3">Comments(<span id="commentsCount-<%= post._id %>"><%= post.comments?.length || 0 %></span>)</h6>
+                  <div class="comment-list">
+                    <%if(post.comments && post.comments.length > 0) {%>
+
+                        <% post.comments.forEach(c => { %>
+                        <div class="comment mb-3 p-3 bg-light rounded-4 shadow-sm position-relative" id="comment-<%= c._id %>">
+                              <!-- Profile + Name + Date -->
+                              <div class="d-flex align-items-center mb-2">
+                                <a href="/profile/<%= c.author._id %>">
+                                  <img src="<%= c.author.photo %>" 
+                                      class="rounded-circle me-3 border border-2 border-white shadow-sm" 
+                                      width="30" height="30" alt="User">
+                                </a>
+                                <div class="d-flex flex-column">
+                                  <span class="fw-semibold">@<%= c.author.username.toLowerCase() %></span>
+                                  <small class="text-muted"><%= new Date(c.createdAt).toLocaleString() %></small>
+                                </div>
+                              </div>
+
+                              <!-- Comment text -->
+                              <p class="mb-0 ps-5 text-secondary"><%= c.text %></p>
+
+                              <!-- Three-dot menu (top-right corner) -->
+                              <% if (currentUser && c.author._id.equals(currentUser._id)) { %>
+                                <div class="dropdown position-absolute top-0 end-0 mt-2 me-2">
+                                  <button class="btn btn-sm text-muted" type="button" id="commentMenu<%= c._id %>" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                  </button>
+                                  <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="commentMenu<%= c._id %>">
+                                    <li>
+                                      <button class="dropdown-item text-danger delete-comment-btn"
+                                              data-postid="<%= post._id %>"
+                                              data-commentid="<%= c._id %>">
+                                        <i class="bi bi-trash me-2"></i> Delete
+                                      </button>
+                                    </li>
+                                  </ul>
+                                </div>
+                              <% } %>
+                            </div>
+
+                        <% }) %>
+                    <%}else {%>
+                        <p>No comments yet..........</p>
+                    <%}%>
+                  </div>  
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p class="text-center text-secondary mt-4">No community posts yet.</p>
+  <% } %>
+</div>
+</section>
+
+<%- include('../partials/footer') %>
