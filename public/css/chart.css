@@ -75,10 +75,20 @@
     border:solid 2px #1E40AF;
   }
 
+
+  #scenarioChart{
+    max-height:500px;
+  }
+
+  #scenarioChart-pie{
+    max-height:500px;
+  }
+  
   @media (max-width: 600px) {
 
-    canvas {
-      height: 250px;
+  canvas {
+      height: 300px !important;
+      width:300px !important;
     }
 
     #buttons{
@@ -97,6 +107,17 @@
   #scenarioChart{
      width:50%;
     height:auto;
+  }
+
+  *  */
+
+  body{
+    padding:5px;
+  }
+  .container{
+    max-width:100%;
+    margin:0;
+    padding:0;
   }
   }
 

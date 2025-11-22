@@ -39,6 +39,7 @@
       },
       options: {
         responsive: true,
+         maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
           tooltip: {
@@ -78,7 +79,7 @@
         }]
       },
       options: {
-        responsive: false,
+        responsive: true,
         maintainAspectRatio: false,
         plugins: {
           legend: { display: false },
@@ -126,17 +127,49 @@ barCanvas.toBlob(async (barBlob) => {
 
 // PDF Download
 document.getElementById('downloadPDF').addEventListener('click', async () => {
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
-  const content = document.querySelector('.container');
-  const canvas = await html2canvas(content, { scale: 2 });
-  const imgData = canvas.toDataURL('image/png');
-  const imgProps = pdf.getImageProperties(imgData);
-  const pdfWidth = pdf.internal.pageSize.getWidth();
-  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-  pdf.save('scenario-result.pdf');
+    const { jsPDF } = window.jspdf;
+
+    const container = document.querySelector('.container');
+
+    // IMPORTANT FIX: Remove any transform/overflow that breaks screenshot
+    container.style.overflow = "visible";
+    container.style.maxHeight = "none";
+
+    // Force full-height rendering
+    const canvas = await html2canvas(container, {
+        scale: 3,               // High quality
+        useCORS: true,
+        allowTaint: true,
+        windowWidth: container.scrollWidth,
+        windowHeight: container.scrollHeight,
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    // MULTI-PAGE FIX
+    let heightLeft = pdfHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+    heightLeft -= pdf.internal.pageSize.getHeight();
+
+    while (heightLeft > 0) {
+        pdf.addPage();
+        position = heightLeft - pdfHeight;
+        pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+        heightLeft -= pdf.internal.pageSize.getHeight();
+    }
+
+    pdf.save("scenario-result.pdf");
 });
+
+
+
+
 
 
 

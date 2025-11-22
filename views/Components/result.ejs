@@ -4,41 +4,41 @@
     <link rel="stylesheet" href="css/chart.css"> 
 
 <body>
-
   <div class="container result">
-    <h2>Scenario: <%= result.textual_analysis.scenario %></h2>
-    <p><strong>Domain:</strong> <%= result.textual_analysis.domain %></p>
-    <p><strong>Probability:</strong> <span class="probability-box"><%= result.textual_analysis.probability %>%</span> </p>
+      <h2>Scenario: <%= result.textual_analysis.scenario %></h2>
+      <p><strong>Domain:</strong> <%= result.textual_analysis.domain %></p>
+      <p><strong>Probability:</strong> <span class="probability-box"><%= result.textual_analysis.probability %>%</span> </p>
 
-    <div class="section">
-      <h3>Key Implications:</h3>
-      <ul>
-        <% result.textual_analysis.key_implications.forEach(item => { %>
-          <li><%= item %></li>
-        <% }) %>
-      </ul>
-    </div>
+      <div class="section">
+        <h3>Key Implications:</h3>
+        <ul>
+          <% result.textual_analysis.key_implications.forEach(item => { %>
+            <li><%= item %></li>
+          <% }) %>
+        </ul>
+      </div>
 
-    <div class="section">
-      <h3>Potential Challenges:</h3>
-      <ul>
-        <% result.textual_analysis.potential_challenges.forEach(item => { %>
-          <li><%= item %></li>
-        <% }) %>
-      </ul>
-    </div>
+      <div class="section">
+        <h3>Potential Challenges:</h3>
+        <ul>
+          <% result.textual_analysis.potential_challenges.forEach(item => { %>
+            <li><%= item %></li>
+          <% }) %>
+        </ul>
+      </div>
 
-    <div class="section">
-      <h3 class="chart-title">Statistical Impact Overview with bar chart</h3>
-      <canvas id="scenarioChart" class="img-fluid"></canvas>
-    </div>
+      <div class="section">
+        <h3 class="chart-title">Statistical Impact Overview with bar chart</h3>
+        <canvas id="scenarioChart" class="img-fluid"></canvas>
+      </div>
 
-    <hr>
+      <hr>
 
-    <div class="section">
-      <h3 class="chart-title">Statistical Impact Overview with Pie chart</h3>
-      <div class="d-flex justify-content-center">
-        <canvas id="scenarioChart-pie" width="500"  class="img-fluid"></canvas>
+      <div class="section">
+          <h3 class="chart-title">Statistical Impact Overview with Pie chart</h3>
+          <div class="d-flex justify-content-center">
+            <canvas id="scenarioChart-pie" width="500"  class="img-fluid"></canvas>
+          </div>
       </div>
   </div>
 

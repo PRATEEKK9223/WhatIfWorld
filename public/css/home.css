@@ -10,4 +10,20 @@ body {
     font-size: 45px;
 }
 
+@media(max-width:600px){
+    .main-btns{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        gap:8px;
+    }
+    .main-img{
+        width:250px;
+    }
+
+    .side-img{
+        width:100px;
+    }
+}
 
