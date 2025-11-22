@@ -30,17 +30,38 @@ import aboutRoutes from "./routes/aboutRoutes.js";
 
 // posport for authentication
 import session from "express-session";
+import MongoStore from "connect-mongo"
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import User from "./Models/user.js" ;
 import "./googleCloudConfig.js";
 
 
+const store = MongoStore.create({
+  mongoUrl: process.env.MONGO_URL,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", () => {
+  console.log("Session Store Error");
+});
+
+// required for HTTPS cookies in deployment
+app.set("trust proxy", 1);
+
 app.use(session({
-  secret: 'valgar',
+  store,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 600000}
+  cookie: {
+    maxAge: 600000,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+  }
 }));
 
 // enabling the flash messages
@@ -67,9 +88,6 @@ passport.deserializeUser(async (id, done) => {
   const user = await User.findById(id);
   done(null, user); // ✅ Load fresh user from DB
 });
-
-
-
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -161,10 +179,8 @@ app.use((err,req,res,next)=>{
   } 
 });
 
-
-
-
+const PORT = process.env.PORT || 3000;
 // to start the server
-app.listen(3000,()=>{
-    console.log("server starts at 3000");
+app.listen(PORT,()=>{
+    console.log("server starts at ",PORT);
 });

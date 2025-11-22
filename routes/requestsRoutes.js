@@ -11,6 +11,7 @@ router.get("/scenario",isLoggedIn,async(req,res)=>{
     const TrendPosts=await Community.find({}).sort({trendingScore: -1}).limit(10).populate("result");
     const MostTrending=TrendPosts[0];
     const Trending= TrendPosts.slice(1);
+    // console.log(Trending);
     res.render("./Components/scenario",{title:"What-If Scenario Prediction",activePage: "explore",MostTrending,Trending});
 });
 

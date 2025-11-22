@@ -66,7 +66,7 @@ router.get("/myPredictions/:id",async(req,res)=>{
         .populate('author', 'username photo')
         .populate('comments.author','username photo')
         .sort({ sharedAt: -1 });
-        console.log(userPosts);
+        // console.log(userPosts);
     res.render("Authentication/myPrediction",{title: "myPredictions - WhatIfWorld",userPosts,activePage:"myPrediction"});
 });
 

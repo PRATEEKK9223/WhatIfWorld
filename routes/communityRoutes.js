@@ -24,7 +24,7 @@ router.post("/submit-result",asyncWrap(async(req,res)=>{
        req.flash("success","Your prediction has been shared in Community");
        return res.redirect('/community');
    }else{
-        req.flash("error", "Something went wrong. Please try again.");
+        // req.flash("error", "Something went wrong. Please try again.");
         return res.redirect(`/scenario`);
    }
 }));
