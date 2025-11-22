@@ -46,4 +46,3 @@ document.getElementById("shareCopy").onclick = async () => {
     document.getElementById("shareCopy").innerHTML = `<i class="bi bi-clipboard"></i> Copy Link`;
   }, 1500);
 };
-
