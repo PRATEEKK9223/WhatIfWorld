@@ -12,10 +12,15 @@ router.get("/contact",(req,res)=>{
 
 // Gmail Transporter (use your Gmail + App Password)
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
-    user: process.env.Email,       
-    pass: process.env.AppPassword,     
+    user: process.env.Email,
+    pass: process.env.AppPassword,
+  },
+  tls: {
+    rejectUnauthorized: false,
   },
 });
 
