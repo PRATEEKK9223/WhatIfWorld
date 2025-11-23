@@ -1,0 +1,88 @@
+/* ===========================================
+   DARK MODE FIXES FOR FAQ PAGE
+   =========================================== */
+
+/* Page background */
+.dark-mode .faqs-wrapper {
+    background: #0d0d0d !important;
+}
+
+/* Title and Subtitle */
+.dark-mode .about-title {
+    color: #ffffff !important;
+}
+
+.dark-mode .about-subtitle {
+    color: #cfcfcf !important;
+}
+
+/* Glass card */
+.dark-mode .glass-card {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 0 20px rgba(171, 0, 255, 0.28);
+    backdrop-filter: blur(10px);
+}
+
+/* Accordion container */
+.dark-mode .accordion-item {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #fff !important;
+}
+
+/* Accordion text */
+.dark-mode .accordion-body {
+    color: #dddddd !important;
+}
+
+/* Accordion button (when collapsed) */
+.dark-mode .accordion-button {
+    background: transparent !important;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+/* Accordion button (active open state) */
+.dark-mode .accordion-button:not(.collapsed) {
+    background: rgba(171, 0, 255, 0.18) !important;
+    color: #d7b0ff !important;
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+
+/* Remove default box shadow */
+.dark-mode .accordion-button:focus {
+    box-shadow: none !important;
+}
+
+/* Icons inside questions */
+.dark-mode .accordion-button i {
+    color: #d7b0ff !important;
+}
+
+.dark-mode button i{
+    color:#fff;
+}
+
+/* For Documentation */
+
+/* LIGHT MODE */
+.glass-card {
+  background: rgba(255, 255, 255, 0.10); /* slightly bright glass */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* DARK MODE */
+.dark-mode .glass-card {
+  background: rgba(255, 255, 255, 0.06); /* slight brightness */
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* Improve list and muted text in dark mode */
+.dark-mode .text-body-secondary {
+  color: rgba(255, 255, 255, 0.70) !important;
+}
+.dark-mode ul li {
+  color: rgba(255, 255, 255, 0.85) !important;
+}

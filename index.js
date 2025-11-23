@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
 import multer from 'multer';
+import cors from "cors";
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -26,6 +27,8 @@ import localAuthRoutes from "./routes/AuthRoutes/localAuthRoutes.js";
 import googleAuthRoutes from "./routes/AuthRoutes/googleAuthRoutes.js";
 import profileRoutes from "./routes/profileRoutes.js";
 import aboutRoutes from "./routes/aboutRoutes.js";
+import footerLinks from "./routes/footerLinksRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js";
 
 
 // posport for authentication
@@ -99,6 +102,7 @@ const __dirname = path.dirname(__filename);
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname,"public")));
+app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
@@ -142,6 +146,10 @@ app.use("/",googleAuthRoutes);
 app.use("/",profileRoutes);
 
 app.use("/",aboutRoutes);
+
+app.use("/",footerLinks);
+
+app.use("/",contactRoutes);
 
 // home route
 app.get("/",(req,res)=>{

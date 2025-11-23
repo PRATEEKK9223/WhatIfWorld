@@ -1,0 +1,373 @@
+<%- layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/footerlinks.css">
+
+<div class="faqs-wrapper container py-5">
+
+  <!-- Title -->
+  <div class="text-center mb-5 fade-slide">
+    <h1 class="display-5 fw-bold about-title">Frequently Asked Questions</h1>
+    <p class="lead text-muted about-subtitle">
+      Everything you need to know about using WhatIfWorld.
+    </p>
+  </div>
+  <h2 class="display-5 fw-bold about-title text-center fs-1 mb-3 mt-3">About WhatIfWorld</h2>
+  <!-- FAQ Section -->
+  <div class="row justify-content-center fade-up ">
+    <div class="col-lg-8 ">
+
+      <div class="glass-card p-4">
+
+        <div class="accordion" id="faqAccordion">
+
+          <!-- Q1 -->
+          <div class="accordion-item ">
+            <h2 class="accordion-header">
+              <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                <i class="bi bi-lightbulb-fill me-2"></i> What is WhatIfWorld?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                WhatIfWorld is a scenario-prediction platform where users ask 
+                <strong>“What if…?”</strong> questions.  
+                Our system uses AI-powered analysis to generate probability, outcomes, impacts, and visual predictions.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                <i class="bi bi-graph-up-arrow me-2"></i>How does WhatIfWorld generate predictions and probabilities?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                <p>WhatIfWorld uses advanced AI models to analyze your scenario and generate accurate, data-informed predictions.</p>
+                <p>Currently, our platform is powered by the Cerebras AI model(llama-3.3-70b), which evaluates patterns, historical data, and logical outcomes to estimate:</p>
+                <ul>
+                  <li>Probability of the scenario happening</li>
+                  <li>Key implications</li>
+                  <li>Potential challenges</li>
+                  <li>Visual and analytical insights</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                <i class="bi bi-chat-left-text-fill me-2"></i> Are the what-if results based on real data or AI prediction models?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                WhatIfWorld’s results are generated using AI prediction models, specifically the Cerebras AI model.
+                Cerebras works like most large language models — it is trained on a huge dataset containing information up to a certain point in time. This means:
+                <ul>
+                  <li>It does not fetch real-time or live data from the internet</li>
+                  <li>It does not automatically update itself after training</li>
+                  <li>It generates insights using its trained knowledge, pattern recognition, reasoning, and probability estimation</li>
+                </ul>
+                Note:-So, while WhatIfWorld’s predictions are intelligent and logical, they are not guaranteed to be real-time or fully accurate, because they come from the model’s internal understanding, not live data feeds.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                <i class="bi bi-person-check-fill me-2"></i> Which domains can I explore in WhatIfWorld?
+              </button>
+            </h2>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                  <ul>
+                    <li>All</li>
+                    <li>Health</li>
+                    <li>Education</li>
+                    <li>Environment</li>
+                    <li>Technology</li>
+                    <li>Economy</li>
+                    <li>Soceity</li>
+                    <li>Politics</li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                <i class="bi bi-shield-lock-fill me-2"></i> Can I trust the probability and implications shown?
+              </button>
+            </h2>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+               The probabilities and implications shown in WhatIfWorld are AI-generated estimates, not guaranteed facts.
+                Our system uses the Cerebras AI model, which analyzes patterns, past data, and logical reasoning to provide thoughtful predictions — but it is important to understand:
+                <ul>
+                  <li>The results are not real-time or scientifically verified</li>
+                  <li>They are based on the model’s training data and reasoning abilities</li>
+                  <li>They are meant for exploration, creativity, and insight, not for decision-making that requires precise accuracy</li>
+                  <li>Predictions may vary depending on how the scenario is written</li>
+                </ul>
+                <pre>
+                  In simple terms:
+                  You can trust the results as smart AI insights, but not as absolute truth.
+                  They are best used for brainstorming, imagination, learning, and exploring possibilities.
+                </pre>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Q6 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                <i class="bi bi-gear-wide-connected me-2"></i> Is there any content moderation in the WhatIfWorld?
+              </button>
+            </h2>
+            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Yes. WhatIfWorld uses AI-based scenario validation to ensure that every submitted scenario follows our guidelines.
+                  When a user enters a scenario, the AI checks whether it is appropriate, meaningful, and safe. If the scenario is not valid or violates the rules, the system will reject it and display an error message.
+
+                  This helps keep the platform safe and ensures that all generated results are based on proper scenarios.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <h2 class="display-5 fw-bold about-title text-center fs-1 mb-3 mt-3">Community Features</h2>
+  <!-- FAQ Section -->
+  <div class="row justify-content-center fade-up ">
+    <div class="col-lg-8 ">
+
+      <div class="glass-card p-4">
+
+        <div class="accordion" id="faqAccordion">
+
+          <!-- Q1 -->
+          <div class="accordion-item ">
+            <h2 class="accordion-header">
+              <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq7">
+                <i class="bi bi-lightbulb-fill me-2"></i> What is the Community section in WhatIfWorld?
+              </button>
+            </h2>
+            <div id="faq7" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                The Community section is a space where users can share their what-if scenario results with others.
+                After generating a scenario, you can post your result as a visual poster in the community. Other users can:
+                <ul>
+                  <li>View your post</li>
+                  <li>Like and comment on it</li>
+                  <li>Share it</li>
+                  <li>Follow discussions</li> 
+                  <li>Explore scenarios created by people around the world</li>
+                </ul>
+                It’s designed to make WhatIfWorld more interactive, allowing everyone to learn, imagine, and engage with each other’s ideas.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq8">
+                <i class="bi bi-graph-up-arrow me-2"></i>How do I post my scenario results to the community?
+              </button>
+            </h2>
+            <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                After generating your what-if scenario, you’ll see a “Share in Community” button on the results page.
+                Simply click that button to instantly publish your scenario poster in the Community section, where other users can view, like, comment, and share your idea.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq9">
+                <i class="bi bi-chat-left-text-fill me-2"></i> Can other users like, comment, or share my post?
+              </button>
+            </h2>
+            <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Yes. Any user who is logged in to WhatIfWorld can like, comment on, and share your post.
+                These interactions help make the Community section more engaging and allow users to explore and discuss each other’s what-if scenarios.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq10">
+                <i class="bi bi-person-check-fill me-2"></i>Can I delete my own posts or comments?
+              </button>
+            </h2>
+            <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+               Yes. You can delete your own posts and comments anytime.
+                In each post or comment, you’ll find three dots (⋮) at the top-right corner.
+                Clicking on these dots will show the Delete option, allowing you to remove your content from the Community section instantly.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <h2 class="display-5 fw-bold about-title text-center fs-1 mb-3 mt-3">Account & Privacy</h2>
+  <!-- FAQ Section -->
+  <div class="row justify-content-center fade-up ">
+    <div class="col-lg-8 ">
+
+      <div class="glass-card p-4">
+
+        <div class="accordion" id="faqAccordion">
+
+          <!-- Q1 -->
+          <div class="accordion-item ">
+            <h2 class="accordion-header">
+              <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq11">
+                <i class="bi bi-lightbulb-fill me-2"></i> Do I need an account to create or share scenarios?
+              </button>
+            </h2>
+            <div id="faq11" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+               Yes. You must be logged in to create scenarios, generate predictions, or share your results in the community.
+                Without an account, you can only view the community posts — but you cannot create scenarios, like, comment, share, or post anything.
+
+                Logging in gives you full access to all features of WhatIfWorld.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq12">
+                <i class="bi bi-graph-up-arrow me-2"></i>How is my personal information stored and protected?
+              </button>
+            </h2>
+            <div id="faq12" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Your personal information is stored securely and cannot be accessed or viewed by other users.
+                We use secure encryption methods, protected databases, and strict access controls to ensure your data stays safe.
+                Only the system uses your information for login and account features — no one else can view, edit, or misuse it. <br>
+
+                Your privacy and security are a top priority in WhatIfWorld.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq13">
+                <i class="bi bi-chat-left-text-fill me-2"></i> Can I delete my account and all my posts?
+              </button>
+            </h2>
+            <div id="faq13" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                You can delete all your posts and comments anytime using the delete option in the Community section.
+                However, account deletion is not yet available. This feature is planned and will be implemented soon, allowing users to fully remove their account and associated data.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <h2 class="display-5 fw-bold about-title text-center fs-1 mb-3 mt-3">Future Updates</h2>
+  <!-- FAQ Section -->
+  <div class="row justify-content-center fade-up ">
+    <div class="col-lg-8 ">
+
+      <div class="glass-card p-4">
+
+        <div class="accordion" id="faqAccordion">
+
+          <!-- Q1 -->
+          <div class="accordion-item ">
+            <h2 class="accordion-header">
+              <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq11">
+                <i class="bi bi-lightbulb-fill me-2"></i> Do I need an account to create or share scenarios?
+              </button>
+            </h2>
+            <div id="faq11" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+               Yes. You must be logged in to create scenarios, generate predictions, or share your results in the community.
+                Without an account, you can only view the community posts — but you cannot create scenarios, like, comment, share, or post anything.
+
+                Logging in gives you full access to all features of WhatIfWorld.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq12">
+                <i class="bi bi-graph-up-arrow me-2"></i>How is my personal information stored and protected?
+              </button>
+            </h2>
+            <div id="faq12" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                Your personal information is stored securely and cannot be accessed or viewed by other users.
+                We use secure encryption methods, protected databases, and strict access controls to ensure your data stays safe.
+                Only the system uses your information for login and account features — no one else can view, edit, or misuse it. <br>
+
+                Your privacy and security are a top priority in WhatIfWorld.
+              </div>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#faq13">
+                <i class="bi bi-chat-left-text-fill me-2"></i> Can I delete my account and all my posts?
+              </button>
+            </h2>
+            <div id="faq13" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body text-muted">
+                You can delete all your posts and comments anytime using the delete option in the Community section.
+                However, account deletion is not yet available. This feature is planned and will be implemented soon, allowing users to fully remove their account and associated data.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+<%- include('../partials/footer') %>
