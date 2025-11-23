@@ -1,7 +1,7 @@
 
 import express from 'express';
 const router = express.Router();
-import nodemailer from 'nodemailer';
+import { Resend } from "resend";
 import {isLoggedIn} from "../utils/middlewares.js";
 
 
@@ -10,51 +10,35 @@ router.get("/contact",(req,res)=>{
 });
 
 
-// Gmail Transporter (use your Gmail + App Password)
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.Email,
-    pass: process.env.AppPassword,
-  },
-  tls: {
-    rejectUnauthorized: false,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-
-// POST route to send message
-router.post("/contact",isLoggedIn, async (req, res) => {
+router.post("/contact", isLoggedIn, async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
     req.flash("error", "All fields are required.");
     return res.redirect("/contact");
-    
   }
 
   try {
-    await transporter.sendMail({
-      from: email,
+    await resend.emails.send({
+      from: "WhatIfWorld <onboarding@resend.dev>",
       to: "whatifworldpulse4@gmail.com",
-      subject: `New Contact Message from ${name}`,
+      subject: `Contact Message from ${name}`,
       text: `
-        Name: ${name}
-        Email: ${email}
+            Name: ${name}
+            Email: ${email}
 
-        Message:
-        ${message}
+            Message:
+            ${message}
       `,
     });
 
     req.flash("success", "Message sent successfully!");
     res.redirect("/contact");
-
-  } catch (err) {
-    console.error("Error sending email:", err);
-    req.flash("error", "Failed to send message. Please try again later.");
+  } catch (error) {
+    console.error("Error sending email:", error);
+    req.flash("error", "Failed to send message.");
     res.redirect("/contact");
   }
 });
