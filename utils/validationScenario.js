@@ -26,7 +26,7 @@ export async function validateScenario(req, res, next) {
     });
 
     const validationResponse = await client.chat.completions.create({
-      model: "llama-3.3-70b",
+      model: "llama-3.1-8b",
       messages: [
         {
           role: "system",

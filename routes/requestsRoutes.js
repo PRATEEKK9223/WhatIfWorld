@@ -64,7 +64,7 @@ router.post("/scenario",isLoggedIn,validateScenario,asyncWrap(async(req,res)=>{
                 content: `Scenario: ${scenario}\nDomain: ${domain}`
             }
           ],
-          model: "llama-3.3-70b",
+          model: "llama-3.1-8b",
           response_format: { type: "json_object" }
 });
 
